@@ -5,19 +5,19 @@
     <link href="https://liujk6525.github.io" />
     <updated>2023-05-10T13:10:59.000Z</updated>
     <category term="Hexo" />
-    <category term="Anaconda" />
     <category term="Jetson Nano" />
     <category term="Yolo-v5" />
     <category term="JupyterLab" />
     <category term="Python" />
     <category term="Jupyter Notebook" />
+    <category term="Anaconda" />
     <category term="Typora" />
     <category term="Git" />
     <category term="Matlab" />
     <category term="路径规划" />
     <category term="python" />
-    <category term="ssd.pytorch" />
     <category term="Yolov5" />
+    <category term="ssd.pytorch" />
     <entry>
         <id>https://liujk6525.github.io/TSP%E9%97%AE%E9%A2%98/%E5%9F%BA%E4%BA%8E%E6%B7%B7%E5%90%88%E7%B2%92%E5%AD%90%E7%BE%A4%E7%AE%97%E6%B3%95%E7%9A%84TSP%E7%AE%97%E6%B3%95/</id>
         <title>基于混合粒子群算法的TSP算法</title>
