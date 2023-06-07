@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://liujk6525.github.io</id>
+    <title>你不是单打独斗 • Posts by &#34;yolov5&#34; tag</title>
+    <link href="https://liujk6525.github.io" />
+    <updated>2023-05-27T02:06:35.000Z</updated>
+    <category term="Anaconda" />
+    <category term="Hexo" />
+    <category term="Jetson Nano" />
+    <category term="Yolo-v5" />
+    <category term="JupyterLab" />
+    <category term="Python" />
+    <category term="Jupyter Notebook" />
+    <category term="Git" />
+    <category term="Typora" />
+    <category term="Matlab" />
+    <category term="路径规划" />
+    <category term="python" />
+    <category term="ssd.pytorch" />
+    <category term="Yolov5" />
+    <entry>
+        <id>https://liujk6525.github.io/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/%E8%B7%91%E9%80%9AYolo-v5/</id>
+        <title>wii11系统跑通Yolo-v5</title>
+        <link rel="alternate" href="https://liujk6525.github.io/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/%E8%B7%91%E9%80%9AYolo-v5/"/>
+        <content type="html">&lt;p&gt;之前跑Yolo-v5是在服务器跑的，现在把权重文件跑完了，正好最近换了新电脑，在本地部署跑跑看，记录如下：&lt;/p&gt;
+&lt;p&gt;复现&lt;img src=&#34;/imgs/$%7Bfiilename%7D/b3809ce4a80e96cf09f6d500abed0fbd_129107_720_720.jpg&#34;  style=&#34;zoom:5%;&#34; /&gt;大佬们的项目之前一定要看这个项目所需的配置环境，掉大坑！！！&lt;/p&gt;
+&lt;p&gt;目标：Yolo-v5 v6.1版本&lt;/p&gt;
+&lt;p&gt;环境：cuda 11.3 | pytorch 1.8.1&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h1 id=&#34;安装anaconda3&#34;&gt;安装Anaconda3&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.anaconda.com/&#34;&gt;&lt;code&gt;anaconda官网&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527104222716.png&#34; alt=&#34;image-20230527104222716&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;直接点击&lt;code&gt;Download&lt;/code&gt;下载安装包，双击安装&lt;/p&gt;
+&lt;p&gt;我把&lt;code&gt;Anaconda&lt;/code&gt;安装在D盘了&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527105216332.png&#34;  style=&#34;zoom: 67%;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;安装cuda&#34;&gt;安装CUDA&lt;/h1&gt;
+&lt;p&gt;安装之前先看下自己电脑配置条件，在终端输入&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;nvidia-smi&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527105741395.png&#34;  style=&#34;zoom: 50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;可以看到&lt;code&gt;Driver Version: 512.98&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在对照&lt;a href=&#34;https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html&#34;&gt;&lt;code&gt;nvidia官网显卡驱动&lt;/code&gt;&lt;/a&gt;给出的版本要求选择CUDA版本，这里我选择的是&lt;code&gt;CUDA 11.3&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527110416589.png&#34;  style=&#34;zoom: 33%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;然后来到&lt;a href=&#34;https://developer.nvidia.com/cuda-toolkit-archive&#34;&gt;&lt;code&gt;CUDA Toolkit Archive&lt;/code&gt;&lt;/a&gt;，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527111819649.png&#34;  style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;点击&lt;code&gt;CUDA Toolkit 11.3.1&lt;/code&gt;即可跳转到&lt;a href=&#34;https://developer.nvidia.com/cuda-11-3-1-download-archive?target_os=Windows&amp;amp;target_arch=x86_64&amp;amp;target_version=10&amp;amp;target_type=exe_local&#34;&gt;&lt;code&gt;CUDA Toolkit 11.3 Update 1 Downloads&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527112055726.png&#34;  style=&#34;zoom: 33%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;直接点击&lt;code&gt;Download(2.7GB)&lt;/code&gt;下载安装包，双击安装&lt;/p&gt;
+&lt;p&gt;这里选择&lt;code&gt;自定义(c)(高级)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527113136663.png&#34;  style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;选择驱动程序组件时，视情况而定；我这里取消勾选&lt;code&gt;Driver components&lt;/code&gt;和&lt;code&gt;Other components&lt;/code&gt;，因为当前版本已经安装了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527113247098.png&#34;  style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;点击&lt;code&gt;下一步&lt;/code&gt;，等待安装完成。&lt;/p&gt;
+&lt;h1 id=&#34;配置cudnn&#34;&gt;配置cuDNN&lt;/h1&gt;
+&lt;p&gt;进入Nvidia官网&lt;a href=&#34;https://developer.nvidia.com/rdp/cudnn-archive&#34;&gt;&lt;code&gt;cuDNN Archive&lt;/code&gt;&lt;/a&gt;，选择&lt;code&gt;for CUDA 11.X&lt;/code&gt;的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527114836975.png&#34; style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;我这里选择的是&lt;code&gt;v8.8.0&lt;/code&gt;版本的，点击&lt;code&gt;Local Install for Windows(Zip)&lt;/code&gt;下载&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527114635962.png&#34;  style=&#34;zoom: 33%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;解压后里面有三个文件&lt;span class=&#34;math inline&#34;&gt;\(bin|include|lib\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527123944344.png&#34;  style=&#34;zoom: 43%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;将其复制到CUDA安装目录就好了，我这里把CUDA安装在D盘了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527124408026.png&#34;  style=&#34;zoom:33%;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;安装pytorch&#34;&gt;安装pytorch&lt;/h1&gt;
+&lt;p&gt;打开&lt;code&gt;Anaconda Prompt&lt;/code&gt;，输入如下命令，创建一个虚拟环境，我这里命名为yolov5；&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda create -n yolov5 python=3.8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;所用到的各种包都是在yolov5这个虚拟环境下配置的，所以需要激活yolov5环境&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda activate yolov5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527131627319.png&#34;  style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;进入Pytorch官网&lt;a href=&#34;https://pytorch.org/get-started/previous-versions/#installing-previous-versions-of-pytorch&#34;&gt;&lt;code&gt;Installing Previous Versions Of Pytorch&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;conda install 安装&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527130150777.png&#34;  style=&#34;zoom: 50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;我这里是安装的CUDA 11.3，输入以下指令&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda install pytorch==1.8.1 torchvision==0.9.1 torchaudio==0.8.1 cudatoolkit=11.3 -c pytorch -c conda-forge&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;-c pytorch&lt;/code&gt; 表示在pytorch的官网下载；&lt;code&gt;-c conda-forge&lt;/code&gt; 表示在conda官网下载&lt;/p&gt;
+&lt;p&gt;但是pytorch官网只有cpu版本的，conda索性找不到了。好在CUDA是向下兼容的，最后选择用pip install的方式下载了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;pip install 安装&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527130231273.png&#34;  style=&#34;zoom: 50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;最后选择的CUDA 11.1，输入以下指令；&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;到这里pytorch环境就配置好了！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527133453540.png&#34;  style=&#34;zoom: 67%;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;下载yolo-v5源代码&#34;&gt;下载Yolo-v5源代码&lt;/h1&gt;
+&lt;p&gt;Yolo-v5更新的很快，但我当时用服务器跑的时候下载的v6.1版本，所以用git bash下载文件。&lt;/p&gt;
+&lt;p&gt;我是在&lt;code&gt;Pycharm Projects&lt;/code&gt;里面创建一个文件夹&lt;code&gt;Yolov5&lt;/code&gt;，然后右击选择&lt;code&gt;Git Bash Here&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527134730082.png&#34;  style=&#34;zoom: 50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt; ifconfigbash&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git &lt;span class=&#34;built_in&#34;&gt;clone&lt;/span&gt; -b v6.1 https://github.com/ultralytics/yolov5.git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527134152555.png&#34;  style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;这样就把源代码下载完成了，我这里把它重命名了&lt;code&gt;yolov5-6.1&lt;/code&gt;，&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527135851656.png&#34;  style=&#34;zoom: 40%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;接下来从requirements.txt安装所需要的包。打开&lt;code&gt;Anaconda Prompt&lt;/code&gt;，cd到yolov5-6.1文件夹&lt;/p&gt;
+&lt;p&gt;我这里是&lt;code&gt;E:\Pycharm Projects\Yolov5\yolov5-6.1&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pip install -r requirements.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527140112538.png&#34; alt=&#34;image-20230527140112538&#34; style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;到这里就全部部署完成好了，接下来就是把自己的权重文件替换成yolov5的预训练权重文件yolov5.pt。&lt;/p&gt;
+&lt;p&gt;执行detect.py，测试了一下。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-1317.jpg&#34;  style=&#34;zoom: 45%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-1685.jpg&#34;  style=&#34;zoom:45%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230527141712871.png&#34;  style=&#34;zoom:40%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;还是能较好的把可采摘的苹果和被遮挡的苹果识别出来。&lt;/p&gt;
+</content>
+        <category term="Python" />
+        <category term="Yolov5" />
+        <updated>2023-05-27T02:06:35.000Z</updated>
+    </entry>
+</feed>

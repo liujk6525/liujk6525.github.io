@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>你不是单打独斗 • Posts by &#34;git&#34; tag</title>
+        <link>https://liujk6525.github.io</link>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 26 May 2023 19:10:59 +0800</pubDate>
+        <lastBuildDate>Fri, 26 May 2023 19:10:59 +0800</lastBuildDate>
+        <category>Anaconda</category>
+        <category>Hexo</category>
+        <category>Jetson Nano</category>
+        <category>Yolo-v5</category>
+        <category>JupyterLab</category>
+        <category>Python</category>
+        <category>Jupyter Notebook</category>
+        <category>Git</category>
+        <category>Typora</category>
+        <category>Matlab</category>
+        <category>路径规划</category>
+        <category>python</category>
+        <category>ssd.pytorch</category>
+        <category>Yolov5</category>
+        <item>
+            <guid isPermalink="true">https://liujk6525.github.io/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/git-clone%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%B8%8A/</guid>
+            <title>git clone连接不上</title>
+            <link>https://liujk6525.github.io/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/git-clone%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%B8%8A/</link>
+            <category>Git</category>
+            <pubDate>Fri, 26 May 2023 19:10:59 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;当我用git clone下载代码时，发现老是连接不上,&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;fatal: unable to access &lt;span class=&#34;string&#34;&gt;&amp;#x27;https://github.com/.../.git&amp;#x27;&lt;/span&gt;: Could not resolve host: github.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;解决办法：&lt;/p&gt;
+&lt;p&gt;对Git的配置文件&lt;code&gt;.gitconfig&lt;/code&gt;设置代理服务器，我的端口是7890&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git config --global http.proxy http:192.0.0.1:7890&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global https.proxy http:192.0.0.1:7890&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;取消代理在终端输入以下代码&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;git config --global --&lt;span class=&#34;built_in&#34;&gt;unset&lt;/span&gt; http.proxy &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;git config --global --&lt;span class=&#34;built_in&#34;&gt;unset&lt;/span&gt; https.proxy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;顺便说一嘴，&lt;code&gt;./gitconfig&lt;/code&gt;配置文件在&lt;code&gt;C:\Users\Liugn&lt;/code&gt;文件夹里面。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230526194347960.png&#34;  style=&#34;zoom: 67%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;发现自己对英文界面的git bash用的不习惯，所以单机右键，点击&lt;code&gt;Options&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230526193925599.png&#34;  style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;点击&lt;code&gt;Window&lt;/code&gt;，它会切换到对应的界面，点击&lt;code&gt;UI language&lt;/code&gt;下拉框选择&lt;code&gt;zh_CN&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230526194125757.png&#34;  style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;最后点击&lt;code&gt;Apply&lt;/code&gt;就好了。&lt;/p&gt;
+&lt;p&gt;外观什么的都可以在&lt;code&gt;选项/options&lt;/code&gt;中设置，这按个人喜好去配了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230526195047033.png&#34;  style=&#34;zoom:67%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;参考&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/orgs/community/discussions/49456&#34;&gt;&lt;code&gt;Recv failure: Connection was reset&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://liujk6525.github.io</id>
+    <title>你不是单打独斗 • Posts by &#34;路径规划&#34; category</title>
+    <link href="https://liujk6525.github.io" />
+    <updated>2023-05-15T00:38:42.000Z</updated>
+    <category term="Anaconda" />
+    <category term="Hexo" />
+    <category term="Jetson Nano" />
+    <category term="Yolo-v5" />
+    <category term="JupyterLab" />
+    <category term="Python" />
+    <category term="Jupyter Notebook" />
+    <category term="Git" />
+    <category term="Typora" />
+    <category term="Matlab" />
+    <category term="路径规划" />
+    <category term="python" />
+    <category term="ssd.pytorch" />
+    <category term="Yolov5" />
+    <entry>
+        <id>https://liujk6525.github.io/%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/%E5%9F%BA%E4%BA%8E%E6%99%BA%E8%83%BD%E7%AE%97%E6%B3%95%E7%9A%84%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/</id>
+        <title>基于智能算法的路径规划</title>
+        <link rel="alternate" href="https://liujk6525.github.io/%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/%E5%9F%BA%E4%BA%8E%E6%99%BA%E8%83%BD%E7%AE%97%E6%B3%95%E7%9A%84%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/"/>
+        <content type="html">&lt;h1 id=&#34;基础知识&#34;&gt;基础知识&lt;/h1&gt;
+&lt;h2 id=&#34;遗传算法&#34;&gt;遗传算法&lt;/h2&gt;
+&lt;p&gt;遗传算法(Genetic Algorithm,&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95&#34;&gt;&lt;code&gt;GA&lt;/code&gt;&lt;/a&gt;)是一种智能优化算法，主要用来解决优化问题，其主要步骤为种群初始化、适应度函数计算、选择、交叉和变异。应用于移动机器人路径规划时其主要步骤相同。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;算法步骤&#34;&gt;算法步骤&lt;/h2&gt;
+&lt;p&gt;选择初始生命种群&lt;/p&gt;
+&lt;ol type=&#34;1&#34;&gt;
+&lt;li&gt;每行选择一个栅格&lt;/li&gt;
+&lt;li&gt;判断相邻栅格是否连续&lt;/li&gt;
+&lt;li&gt;不连续时选择栅格进行插入，直到连续&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;循环&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;评价种群中的个体适应度fitness&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;以比例原则(分数高的挑中几率也较高)选择产生下一个种群(轮盘法、竞争法及等级轮盘法)。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;选择&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;是按照轮盘法来选择的个体 &lt;span class=&#34;math display&#34;&gt;\[
+d =\sum_{i=1}^{end-1}{\sqrt{(x_{i+1}-x{i})^{2}+(y_{i+1}-y_{i})^{2}}}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+fit_1=1/d
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+fit_2=acrccos(\frac{(b^2+c^2-a^2)}{2bc})
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+fit=fit_1+fit_2
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+p_i=\frac{fit_i}{\sum_{i=1}^{end}fit_i}
+\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;改变该种群(选择、交叉和变异)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;交叉&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如下图所示，当两个个体{0|6|7|13|19|24}和{0|1|2|3|8|13|18|24}在栅格13处交叉，经过交叉操作后会生成新的个体{0|6|7|13|18|24}和{0|1|2|3|8|13|19|24}&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230515103232016.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;变异&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如下图所示，当个体{0|1|2|3|8|13|18|24}经过变异操作后会随机生成新的个体{0|1|7|13|18|24}&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230515103809856.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;直到停止循环的条件满足&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;代码实现&#34;&gt;代码实现&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230515104419609.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1yT4y1T7Eb?p=8&amp;amp;vd_source=fe8e916be2bd597efffd8dfd95249141&#34;&gt;&lt;code&gt;机器人路径规划、轨迹优化课程&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+</content>
+        <category term="Matlab" />
+        <updated>2023-05-15T00:38:42.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://liujk6525.github.io/%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/%E5%9F%BA%E4%BA%8E%E9%87%87%E6%A0%B7%E7%9A%84%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/</id>
+        <title>基于采样的路径规划</title>
+        <link rel="alternate" href="https://liujk6525.github.io/%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/%E5%9F%BA%E4%BA%8E%E9%87%87%E6%A0%B7%E7%9A%84%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/"/>
+        <content type="html">&lt;h1 id=&#34;基础知识&#34;&gt;基础知识&lt;/h1&gt;
+&lt;p&gt;虽然&lt;code&gt;基于图搜索的路径规划算法&lt;/code&gt;能够给出一个&lt;strong&gt;全局范围内的最优解&lt;/strong&gt;，但是当地图过大，空间维度过高时，它的搜索效率就会变得很慢。主要用于低维空间的路径规划问题。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;概率路图算法probabilistic-road-map-prm&#34;&gt;概率路图算法(Probabilistic Road Map, &lt;a href=&#34;https://en.wikipedia.org/wiki/Probabilistic_roadmap&#34;&gt;&lt;code&gt;PRM&lt;/code&gt;&lt;/a&gt;)&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;PRM&lt;/code&gt;算法首先使用随机采样的方式在环境中建立路径网络图，将连续的空间转换为离散的空间，然后在路径网络图上进行路径规划，解决在高维空间中搜索效率低的问题&lt;/p&gt;
+&lt;p&gt;算法流程&lt;/p&gt;
+&lt;p&gt;​ &lt;img src=&#34;/imgs/$%7Bfiilename%7D/prm.png&#34;  style=&#34;zoom: 80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;采样点的数量&lt;/strong&gt;和&lt;strong&gt;采样点间存在通道的最大距离&lt;/strong&gt;是关键参数，具体的&lt;/p&gt;
+&lt;p&gt;采样点的数量太少，可能会导致路径规划失败，因为生成的概率路线少了。&lt;/p&gt;
+&lt;p&gt;随着采样点数量增加，结果会越来越接近最短路径，但同时搜索效率会降低&lt;/p&gt;
+&lt;h2 id=&#34;快速扩展随机树rapidly-exploring-random-tree-rrt算法&#34;&gt;快速扩展随机树(Rapidly-exploring Random Tree, &lt;a href=&#34;https://en.wikipedia.org/wiki/Rapidly-exploring_random_tree&#34;&gt;&lt;code&gt;RRT&lt;/code&gt;&lt;/a&gt;)算法&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;RRT&lt;/code&gt;算法是一种单查询(single-query)算法，搜索过程就像一棵树不断向周围扩展生长。它的复杂度不受地图的离散程度影响，在高维空间中具有很高的搜索效率。&lt;/p&gt;
+&lt;p&gt;​ &lt;img src=&#34;/imgs/$%7Bfiilename%7D/RRT.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;缺点：只管尽快地找到可行路径，所以最终路径并不是最优的，甚至会非常“绕”。&lt;/p&gt;
+&lt;h2 id=&#34;双向快速扩展随机树rrt-connect算法&#34;&gt;双向快速扩展随机树(&lt;a href=&#34;https://ieeexplore.ieee.org/document/844730&#34;&gt;&lt;code&gt;RRT-Connect&lt;/code&gt;&lt;/a&gt;)算法&lt;/h2&gt;
+&lt;p&gt;在&lt;code&gt;RRT&lt;/code&gt;的基础上引入了双向扩展环节，分别以起点和目标点为根节点生成两棵树进行双向扩展，&lt;strong&gt;加快了搜索速度&lt;/strong&gt;，当两棵树建立连接时被认为路径规划成功。&lt;/p&gt;
+&lt;p&gt;缺点：但是&lt;code&gt;RRT-Connect&lt;/code&gt;和&lt;code&gt;RRT&lt;/code&gt;一样，都是单查询算法，最终路径并不是最优的。&lt;/p&gt;
+&lt;h2 id=&#34;rrt算法&#34;&gt;&lt;a href=&#34;https://arxiv.org/abs/1105.1186&#34;&gt;&lt;code&gt;RRT*&lt;/code&gt;&lt;/a&gt;算法&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;RRT*&lt;/code&gt;算法是一种渐近最优算法。在&lt;code&gt;RRT&lt;/code&gt;算法的基础上，增加了将&lt;span class=&#34;math inline&#34;&gt;\(X_{rand}\)&lt;/span&gt;加入搜索树 T 时&lt;strong&gt;父节点的选择策略&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;RRT*&lt;/code&gt;算法在选择父节点时会有一个&lt;strong&gt;重连(Rewire)&lt;/strong&gt;过程，也就是在以&lt;span class=&#34;math inline&#34;&gt;\(X_{rand}\)&lt;/span&gt;为圆心、半径为&lt;span class=&#34;math inline&#34;&gt;\(r\)&lt;/span&gt;的邻域内，找到与&lt;span class=&#34;math inline&#34;&gt;\(X_{new}\)&lt;/span&gt;连接后移动代价(从起点移动到&lt;span class=&#34;math inline&#34;&gt;\(X_{new}\)&lt;/span&gt;的路径长度)最小的节点，并重新选择&lt;span class=&#34;math inline&#34;&gt;\(X_{min}\)&lt;/span&gt;作为&lt;span class=&#34;math inline&#34;&gt;\(X_{new}\)&lt;/span&gt;的父节点，而不是&lt;span class=&#34;math inline&#34;&gt;\(X_{near}\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;简单理解就是&lt;span class=&#34;math inline&#34;&gt;\(Xnear\)&lt;/span&gt;产生了&lt;span class=&#34;math inline&#34;&gt;\(Xnew\)&lt;/span&gt;,然而&lt;span class=&#34;math inline&#34;&gt;\(Xnew\)&lt;/span&gt;抛弃了&lt;span class=&#34;math inline&#34;&gt;\(Xnear\)&lt;/span&gt;，选择了移动代价最小的&lt;span class=&#34;math inline&#34;&gt;\(Xmin\)&lt;/span&gt;作为父节点。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/v2-1b532a8161587f211b6a7a3c9e239589_720w.webp&#34;  style=&#34;zoom: 67%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;缺点：&lt;code&gt;RRT*&lt;/code&gt;*是对自由空间进行均匀采样，搜索树上会生成很多冗余的分支，所以&lt;code&gt;RRT*&lt;/code&gt;的收敛速度很慢。&lt;/p&gt;
+&lt;h2 id=&#34;informed-rrt算法&#34;&gt;&lt;a href=&#34;https://arxiv.org/abs/1404.2334&#34;&gt;&lt;code&gt;Informed-RRT*&lt;/code&gt;&lt;/a&gt;算法&lt;/h2&gt;
+&lt;p&gt;对&lt;code&gt;RRT*&lt;/code&gt;的改进策略：采用椭圆采样来代替全局均匀采样&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230514175249529.png&#34;  style=&#34;zoom: 50%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;以起点 &lt;span class=&#34;math inline&#34;&gt;\(X_{start}\)&lt;/span&gt;和终点&lt;span class=&#34;math inline&#34;&gt;\(X_{goal}\)&lt;/span&gt;作为椭圆的焦点，令&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;等于初始路径长度&lt;span class=&#34;math inline&#34;&gt;\(c_{best}\)&lt;/span&gt;的一半，即&lt;span class=&#34;math inline&#34;&gt;\(a=\frac{c_{best}}{2}\)&lt;/span&gt;，则$ c=&lt;span class=&#34;math inline&#34;&gt;\(，\)&lt;/span&gt;b=$，这样就可以得到椭圆方程的所有参数。&lt;/p&gt;
+&lt;p&gt;在之后的迭代中，如果没找到更短的路径，就用&lt;span class=&#34;math inline&#34;&gt;\(c_{min}\)&lt;/span&gt;作为新的&lt;span class=&#34;math inline&#34;&gt;\(c_{best}\)&lt;/span&gt;，然后在新的椭圆区域进行采样。&lt;/p&gt;
+&lt;h1 id=&#34;代码实现&#34;&gt;代码实现&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230514234320378.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230514234432119.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230514234602917.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230514234911888.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/349074802&#34;&gt;&lt;code&gt;路径规划 | 随机采样算法：PRM、RRT、RRT-Connect、RRT*&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/372315811&#34;&gt;&lt;code&gt;路径规划 | 随机采样算法：Informed-RRT*&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1yT4y1T7Eb?p=5&#34;&gt;&lt;code&gt;机器人路径规划、轨迹优化系列课程&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[1] Lavalle S M . Rapidly-Exploring Random Trees: A New Tool for Path Planning[J]. Research Report, 1999.&lt;/p&gt;
+&lt;p&gt;[2] Jr J , Lavalle S M . RRT-Connect: An Efficient Approach to Single-Query Path Planning[C]// Proceedings of the 2000 IEEE International Conference on Robotics and Automation, ICRA 2000, April 24-28, 2000, San Francisco, CA, USA. IEEE, 2000.&lt;/p&gt;
+&lt;p&gt;[3] Karaman S , Frazzoli E . Sampling-based Algorithms for Optimal Motion Planning[J]. The International Journal of Robotics Research, 2011, 30(7):846-894.&lt;/p&gt;
+&lt;p&gt;[4] Gammell J D , Srinivasa S S , Barfoot T D . Informed RRT*: Optimal Sampling-based Path Planning Focused via Direct Sampling of an Admissible Ellipsoidal Heuristic[J]. IEEE, 2014.&lt;/p&gt;
+</content>
+        <category term="python" />
+        <updated>2023-05-13T13:41:15.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://liujk6525.github.io/%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/%E5%9F%BA%E4%BA%8E%E6%90%9C%E7%B4%A2%E7%9A%84%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/</id>
+        <title>基于搜索的路径规划</title>
+        <link rel="alternate" href="https://liujk6525.github.io/%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/%E5%9F%BA%E4%BA%8E%E6%90%9C%E7%B4%A2%E7%9A%84%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/"/>
+        <content type="html">&lt;h1 id=&#34;基础知识&#34;&gt;基础知识&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;图搜索法&lt;/strong&gt;是通过利用已有的环境地图和障碍物等数据信息，建立由起点至目标点的可行路线。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;配置空间(Configuration Space)&lt;/strong&gt; 在实际环境，要将工作空间转换到配置空间中，即将机器人转化为一个&lt;strong&gt;质点&lt;/strong&gt;，同时将障碍物按照机器人的体积进行膨胀&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;基本流程&#34;&gt;基本流程&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;在容器&lt;code&gt;open list&lt;/code&gt;中存放将要访问的节点&lt;/li&gt;
+&lt;li&gt;将起点加入容器&lt;/li&gt;
+&lt;li&gt;While True：&lt;/li&gt;
+&lt;li&gt;弹出：从容器中取出一个节点&lt;/li&gt;
+&lt;li&gt;扩展：将该节点周围的其他节点放入&lt;code&gt;open list&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;深度优先搜索depth-first-search-dfs-算法&#34;&gt;深度优先搜索(Depth First Search, &lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2&#34;&gt;&lt;code&gt;DFS&lt;/code&gt;&lt;/a&gt; )算法&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;优先扩展搜索深度较大的节点，从起点开始，按照某个顺序一条路走下去，直至不能再继续为止，然后回到上一节点，再换另一条路走下去；&lt;/li&gt;
+&lt;li&gt;深度优先搜索的过程是一条路走到底后，最后访问的节点最先拿来处理，整个过程可以用&lt;code&gt;栈(stack)&lt;/code&gt;来表示——&lt;strong&gt;后进先出&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;深度优先算法优先扩展搜索深度较大的节点，因此能够更迅速的获得下一个可行路径，不过深度优先算法获取的第一个路径通常是比较长的路径。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在&lt;strong&gt;无权图&lt;/strong&gt;中找到从节点&lt;code&gt;a&lt;/code&gt;到节点&lt;code&gt;j&lt;/code&gt;的路径为例&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/dfs.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;按照&lt;code&gt;DFS&lt;/code&gt;的基本流程搜索&lt;code&gt;a&lt;/code&gt;到&lt;code&gt;j&lt;/code&gt;的路径：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/dfs-1683872034517-4.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;从目标点开始回溯：&lt;code&gt;a-&amp;gt;b-&amp;gt;f-&amp;gt;j&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;广度优先搜索breadth-first-search-bfs算法&#34;&gt;广度优先搜索(Breadth First Search, &lt;a href=&#34;https://zh.wikipedia.org/zh-hans/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2&#34;&gt;&lt;code&gt;BFS&lt;/code&gt;&lt;/a&gt;)算法&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;每一步都扩展同一层的所有可能节点，一层一层扩展下去，直到某一层搜索到终点为止。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;广度优先搜索的过程是一层中先访问的节点拿来处理，可以用&lt;code&gt;队列(queue)&lt;/code&gt;来表示——&lt;strong&gt;先进先出&lt;/strong&gt;。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;广度优先算法优先扩展深入较小的节点，呈&lt;strong&gt;波状推进&lt;/strong&gt;的形式搜索。因此广度优先算法检索到的第一个路径通常是最短路径。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/bfs.png&#34;   style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;贪婪最佳优先搜索greedy-best-first-searchgbfs-算法&#34;&gt;贪婪最佳优先搜索(Greedy Best First Search,&lt;a href=&#34;https://www.codecademy.com/resources/docs/ai/search-algorithms/greedy-best-first-search&#34;&gt;&lt;code&gt;GBFS&lt;/code&gt;&lt;/a&gt; )算法&lt;/h2&gt;
+&lt;p&gt;使用的是&lt;strong&gt;优先队列(Priority Queue)&lt;/strong&gt;，普通队列是一种&lt;strong&gt;先进先出&lt;/strong&gt;的数据结构，而在优先队列中元素被赋予了优先级，最高优先级元素优先删除，也就是&lt;code&gt;first in&lt;/code&gt;, &lt;code&gt;largest out&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在图搜索算法中，优先级判断的标准是代价函数 &lt;span class=&#34;math inline&#34;&gt;\(f(n)\)&lt;/span&gt; ， &lt;span class=&#34;math inline&#34;&gt;\(f(n)\)&lt;/span&gt; 越小，优先级越高。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+f(n)=h(n)
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(h(n)\)&lt;/span&gt;是启发式函数，为节点&lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;到目标节点之间所形成路径的最小代价值。一般为&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E8%B7%9D%E7%A6%BB&#34;&gt;&lt;code&gt;欧氏距离&lt;/code&gt;&lt;/a&gt;或者&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%9B%BC%E5%93%88%E9%A0%93%E8%B7%9D%E9%9B%A2&#34;&gt;&lt;code&gt;曼哈顿距离&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;遇到障碍物时，它很容易陷入局部最优的陷阱。&lt;/p&gt;
+&lt;h1 id=&#34;dijkstra算法&#34;&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%88%B4%E5%85%8B%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95&#34;&gt;&lt;code&gt;Dijkstra&lt;/code&gt;&lt;/a&gt;算法&lt;/h1&gt;
+&lt;p&gt;Dijkstra算法是从一个顶点到其余各顶点的最短路径算法，其流程仍然与上述算法基本一致，它也是用优先队列作为&lt;code&gt;open list&lt;/code&gt;的数据结构，它和&lt;code&gt;GBFS&lt;/code&gt;的区别在于代价函数 &lt;span class=&#34;math inline&#34;&gt;\(f(n)\)&lt;/span&gt;的定义:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+f(n)=g(n)
+\]&lt;/span&gt; &lt;span class=&#34;math inline&#34;&gt;\(g(n)\)&lt;/span&gt;表示从起始节点到当前节点&lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;的移动代价函数。&lt;/p&gt;
+&lt;p&gt;计算起点&lt;code&gt;v1&lt;/code&gt;到终点&lt;code&gt;v6&lt;/code&gt;的最短路径，箭头上的数值表示&lt;strong&gt;两个节点间的距离&lt;/strong&gt;&lt;/p&gt;
+&lt;ol type=&#34;1&#34;&gt;
+&lt;li&gt;&lt;p&gt;首先扩展第一个节点，计算其余邻近节点与第一个节点的距离，从未扩展的节点中选择代价函数最小的节点进行扩展，并更新其余节点的代价函数&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重复进行上面的步骤，直到所有节点都已扩展。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;最后标出起点到终点的最短路径&lt;/p&gt;
+&lt;p&gt;找到一条从&lt;code&gt;1&lt;/code&gt;到&lt;code&gt;6&lt;/code&gt;的最短路径&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​ &lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230512205640371.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;open list&lt;/code&gt;: 4(1) 2(2) # 存储已经被搜索过但没有被访问过的节点，并对其进行排序&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;closed list&lt;/code&gt;:1(0) # 存储已经被访问过的节点&lt;/p&gt;
+&lt;p&gt;从&lt;code&gt;open list&lt;/code&gt;中的节点中选择距离最小的节点作为扩展节点，显然是节点4。&lt;/p&gt;
+&lt;p&gt;​ &lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230512210430685.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;open list&lt;/code&gt;: 2(2) 3(3) 7(5) 6(9) # 遍历邻接节点，更新距离&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;closed list&lt;/code&gt;: 1(0) 4(1)&lt;/p&gt;
+&lt;p&gt;重复上述操作。选择新的扩展节点，即节点2&lt;/p&gt;
+&lt;p&gt;​ &lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230512211350445.png&#34; style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;open list&lt;/code&gt;: 3(3) 7(5) &lt;strong&gt;6(9)&lt;/strong&gt; 5(13)&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;closed list&lt;/code&gt;: 1(0) 4(1) 2(2)&lt;/p&gt;
+&lt;p&gt;选择新的扩展节点，即节点3&lt;/p&gt;
+&lt;p&gt;​ &lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230512212316556.png&#34; style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;open list&lt;/code&gt;: 7(5) &lt;strong&gt;6(8)&lt;/strong&gt; 5(13) # 注意这里访问节点3，对它的领接节点6的距离进行了更新&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;closed list&lt;/code&gt;: 1(0) 4(1) 2(2) 3(3)&lt;/p&gt;
+&lt;p&gt;选择新的扩展节点，即节点7&lt;/p&gt;
+&lt;p&gt;​ &lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230512213110030.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;open list&lt;/code&gt;: &lt;strong&gt;6(6)&lt;/strong&gt; 5(13) # 注意这里访问节点7，对它的领接节点6的距离进行了更新&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;closed list&lt;/code&gt;: 1(0) 4(1) 2(2) 3(3) 7(5)&lt;/p&gt;
+&lt;p&gt;​ &lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230512214147752.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;closed list&lt;/code&gt;: 1(0) 4(1) 2(2) 3(3) 7(5) 6(6)&lt;/p&gt;
+&lt;h1 id=&#34;a搜索a-search算法&#34;&gt;&lt;code&gt;A*&lt;/code&gt;搜索(&lt;a href=&#34;https://zh.wikipedia.org/wiki/A*%E6%90%9C%E5%B0%8B%E6%BC%94%E7%AE%97%E6%B3%95&#34;&gt;&lt;code&gt;A* search&lt;/code&gt;&lt;/a&gt;)算法&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;GBFS&lt;/code&gt;用节点到目标点的距离作为代价函数，将搜索方向引向目标点，搜索效率高。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Dijkstra&lt;/code&gt;算法采用起点到当前扩展节点的移动代价作为代价函数，能够确保路径最优。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;A*&lt;/code&gt;搜索算法在&lt;code&gt;Dijkstra&lt;/code&gt;算法的基础上增加启发式函数&lt;span class=&#34;math inline&#34;&gt;\(h(n)\)&lt;/span&gt;，规定其代价函数为 &lt;span class=&#34;math display&#34;&gt;\[
+f(n)=g(n)+h(n)
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;代码实现&#34;&gt;代码实现&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/Astart.png&#34; alt=&#34;Astart&#34; style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/dijkstra.png&#34; alt=&#34;dijkstra&#34; style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/346666812&#34;&gt;&lt;code&gt;路径规划 | 图搜索算法：DFS、BFS、GBFS、Dijkstra、A*&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1yT4y1T7Eb?p=2&#34;&gt;机器人路径规划、轨迹优化系列课程&lt;/a&gt;&lt;/p&gt;
+</content>
+        <category term="Python" />
+        <updated>2023-05-12T03:36:41.000Z</updated>
+    </entry>
+</feed>

@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>你不是单打独斗 • Posts by &#34;jupyterlab&#34; tag</title>
+        <link>https://liujk6525.github.io</link>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 29 May 2023 14:08:59 +0800</pubDate>
+        <lastBuildDate>Mon, 29 May 2023 14:08:59 +0800</lastBuildDate>
+        <category>Anaconda</category>
+        <category>Hexo</category>
+        <category>Jetson Nano</category>
+        <category>Yolo-v5</category>
+        <category>JupyterLab</category>
+        <category>Python</category>
+        <category>Jupyter Notebook</category>
+        <category>Git</category>
+        <category>Typora</category>
+        <category>Matlab</category>
+        <category>路径规划</category>
+        <category>python</category>
+        <category>ssd.pytorch</category>
+        <category>Yolov5</category>
+        <item>
+            <guid isPermalink="true">https://liujk6525.github.io/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/JupyterLab%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
+            <title>JupyterLab安装与配置</title>
+            <link>https://liujk6525.github.io/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/JupyterLab%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</link>
+            <category>JupyterLab</category>
+            <pubDate>Mon, 29 May 2023 14:08:59 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;&lt;a href=&#34;https://jupyterlab.readthedocs.io/en/latest/index.html&#34;&gt;&lt;code&gt;Jupyter Lab&lt;/code&gt;&lt;/a&gt;是一个交互式笔记本，支持运行40多种编程语言。它本质上是一个web应用程序，可以很方便的创建和共享程序文档，支持实时代码，数学方程，可视化和markdown&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;JupyterLab&lt;/code&gt;安装和初始配置记录如下：&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h1 id=&#34;安装jupyterlab&#34;&gt;安装&lt;code&gt;JupyterLab&lt;/code&gt;&lt;/h1&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pip install jupyterlab&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h1 id=&#34;下载中文包&#34;&gt;下载中文包&lt;/h1&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;pip install jupyterlab-language-pack-zh-CN &lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h1 id=&#34;启动jupyter-lab服务&#34;&gt;启动&lt;code&gt;Jupyter Lab&lt;/code&gt;服务&lt;/h1&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;jupyter lab&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;4&#34; type=&#34;1&#34;&gt;
+&lt;li&gt;&lt;p&gt;设置中文界面&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230529143831411.png&#34;  style=&#34;zoom: 33%;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;修改默认打开的工作目录&#34;&gt;修改默认打开的工作目录&lt;/h1&gt;
+&lt;ol type=&#34;1&#34;&gt;
+&lt;li&gt;先执行以下指令生成 &lt;code&gt;JupyteraLab&lt;/code&gt; 的配置文件&lt;code&gt;jupyter_lab_config.py&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;jupyter lab --generate-config&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;2&#34; type=&#34;1&#34;&gt;
+&lt;li&gt;&lt;p&gt;修改&lt;code&gt;C:\\User\liugn\.jupyter_lab_congfig.py&lt;/code&gt;配置文件&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230529145410362.png&#34;  style=&#34;zoom:50%;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我这里是把工作文件设置在了&lt;code&gt;E:\Pycharm Projects&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;切换虚拟环境&#34;&gt;切换虚拟环境&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;jupyter lab&lt;/code&gt;是安装在base环境下的，很多时候要用到其他虚拟环境的特定包。&lt;/p&gt;
+&lt;ol type=&#34;1&#34;&gt;
+&lt;li&gt;给已创建好的虚拟环境添加&lt;code&gt;ipykernel&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda install -n yolov5 ipykernel&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;2&#34; type=&#34;1&#34;&gt;
+&lt;li&gt;&lt;p&gt;激活虚拟环境&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda activate yolv5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;将虚拟环境写入&lt;code&gt;Jupyter&lt;/code&gt;的&lt;code&gt;kernel&lt;/code&gt;中&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;python -m ipykernel install --name yolov5 --display-name yolov5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;第一个虚拟环境名称：创建的虚拟环境名称&lt;/li&gt;
+&lt;li&gt;第二个虚拟环境名称：其在&lt;code&gt;jupyter noteboook&lt;/code&gt;的&lt;code&gt;kernel&lt;/code&gt;选项中显示的名称&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230529151407677.png&#34;  style=&#34;zoom: 50%;&#34; /&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

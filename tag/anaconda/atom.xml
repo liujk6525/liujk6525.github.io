@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://liujk6525.github.io</id>
+    <title>你不是单打独斗 • Posts by &#34;anaconda&#34; tag</title>
+    <link href="https://liujk6525.github.io" />
+    <updated>2023-05-26T05:44:08.000Z</updated>
+    <category term="Anaconda" />
+    <category term="Hexo" />
+    <category term="Jetson Nano" />
+    <category term="Yolo-v5" />
+    <category term="JupyterLab" />
+    <category term="Python" />
+    <category term="Jupyter Notebook" />
+    <category term="Git" />
+    <category term="Typora" />
+    <category term="Matlab" />
+    <category term="路径规划" />
+    <category term="python" />
+    <category term="ssd.pytorch" />
+    <category term="Yolov5" />
+    <entry>
+        <id>https://liujk6525.github.io/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/Anaconda-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9/</id>
+        <title>Anaconda--配置文件修改</title>
+        <link rel="alternate" href="https://liujk6525.github.io/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/Anaconda-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9/"/>
+        <content type="html">&lt;p&gt;将envs_dirs设置为自己anaconda安装的目录上（我的是在D:），不然他默认安装到.！！！&lt;/p&gt;
+&lt;p&gt;因为我的anaconda安装在D盘，如果各位看官有充足的内存够安装在C盘，就当笑笑看啦~&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h1 id=&#34;首先第一步&#34;&gt;首先第一步！&lt;/h1&gt;
+&lt;p&gt;修改 D：Anaconda3文件夹的权限，选中后右击选择属性，然后点击安全，选择&lt;code&gt;User&lt;/code&gt;后点击编辑，将下面的权限全打勾，&lt;/p&gt;
+&lt;p&gt;稍微等待一会时间。&lt;/p&gt;
+&lt;h1 id=&#34;二选一&#34;&gt;二选一&lt;/h1&gt;
+&lt;h2 id=&#34;修改.condarc推荐手残党&#34;&gt;修改./condarc（推荐，手残党）&lt;/h2&gt;
+&lt;ol type=&#34;1&#34;&gt;
+&lt;li&gt;直接将.，将下面的内容粘入，&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight txt&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;envs_dirs:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  - D:\Anaconda3\envs&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;pkgs_dirs:&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;  - D:\Anaconda3\pkgs&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ol start=&#34;2&#34; type=&#34;1&#34;&gt;
+&lt;li&gt;&lt;p&gt;保存并关闭文件。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;打开一个终端，执行指令可查看conda配置信息。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda config --show&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;修改指令&#34;&gt;修改指令&lt;/h2&gt;
+&lt;ol type=&#34;1&#34;&gt;
+&lt;li&gt;&lt;p&gt;打开一个终端，执行添加指令，&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda config --add envs_dirs D:\Anaconda3\envs&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;conda config --add pkgs_dir  D:\Anaconda3\pkgs&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;同样的，执行指令查看配置信息。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda config --show&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+        <category term="Anaconda" />
+        <updated>2023-05-26T05:44:08.000Z</updated>
+    </entry>
+</feed>

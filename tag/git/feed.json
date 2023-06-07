@@ -1,0 +1,18 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "你不是单打独斗 • All posts by \"git\" tag",
+    "description": "",
+    "home_page_url": "https://liujk6525.github.io",
+    "items": [
+        {
+            "id": "https://liujk6525.github.io/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/git-clone%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%B8%8A/",
+            "url": "https://liujk6525.github.io/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/git-clone%E8%BF%9E%E6%8E%A5%E4%B8%8D%E4%B8%8A/",
+            "title": "git clone连接不上",
+            "date_published": "2023-05-26T11:10:59.000Z",
+            "content_html": "<p>当我用git clone下载代码时，发现老是连接不上,</p>\r\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">fatal: unable to access <span class=\"string\">&#x27;https://github.com/.../.git&#x27;</span>: Could not resolve host: github.com</span><br></pre></td></tr></table></figure>\r\n<p>解决办法：</p>\r\n<p>对Git的配置文件<code>.gitconfig</code>设置代理服务器，我的端口是7890</p>\r\n<span id=\"more\"></span>\r\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">git config --global http.proxy http:192.0.0.1:7890</span><br><span class=\"line\">git config --global https.proxy http:192.0.0.1:7890</span><br></pre></td></tr></table></figure>\r\n<p>取消代理在终端输入以下代码</p>\r\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">git config --global --<span class=\"built_in\">unset</span> http.proxy </span><br><span class=\"line\">git config --global --<span class=\"built_in\">unset</span> https.proxy</span><br></pre></td></tr></table></figure>\r\n<p>顺便说一嘴，<code>./gitconfig</code>配置文件在<code>C:\\Users\\Liugn</code>文件夹里面。</p>\r\n<p><img src=\"/imgs/$%7Bfiilename%7D/image-20230526194347960.png\"  style=\"zoom: 67%;\" /></p>\r\n<p>发现自己对英文界面的git bash用的不习惯，所以单机右键，点击<code>Options</code></p>\r\n<p><img src=\"/imgs/$%7Bfiilename%7D/image-20230526193925599.png\"  style=\"zoom:50%;\" /></p>\r\n<p>点击<code>Window</code>，它会切换到对应的界面，点击<code>UI language</code>下拉框选择<code>zh_CN</code></p>\r\n<p><img src=\"/imgs/$%7Bfiilename%7D/image-20230526194125757.png\"  style=\"zoom:50%;\" /></p>\r\n<p>最后点击<code>Apply</code>就好了。</p>\r\n<p>外观什么的都可以在<code>选项/options</code>中设置，这按个人喜好去配了。</p>\r\n<p><img src=\"/imgs/$%7Bfiilename%7D/image-20230526195047033.png\"  style=\"zoom:67%;\" /></p>\r\n<p>参考</p>\r\n<p><a href=\"https://github.com/orgs/community/discussions/49456\"><code>Recv failure: Connection was reset</code></a></p>\r\n",
+            "tags": [
+                "Git"
+            ]
+        }
+    ]
+}

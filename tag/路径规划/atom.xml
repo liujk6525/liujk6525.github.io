@@ -1,0 +1,447 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://liujk6525.github.io</id>
+    <title>你不是单打独斗 • Posts by &#34;路径规划&#34; tag</title>
+    <link href="https://liujk6525.github.io" />
+    <updated>2023-05-10T13:10:59.000Z</updated>
+    <category term="Anaconda" />
+    <category term="Hexo" />
+    <category term="Jetson Nano" />
+    <category term="Yolo-v5" />
+    <category term="JupyterLab" />
+    <category term="Python" />
+    <category term="Jupyter Notebook" />
+    <category term="Git" />
+    <category term="Typora" />
+    <category term="Matlab" />
+    <category term="路径规划" />
+    <category term="python" />
+    <category term="ssd.pytorch" />
+    <category term="Yolov5" />
+    <entry>
+        <id>https://liujk6525.github.io/TSP%E9%97%AE%E9%A2%98/%E5%9F%BA%E4%BA%8E%E6%B7%B7%E5%90%88%E7%B2%92%E5%AD%90%E7%BE%A4%E7%AE%97%E6%B3%95%E7%9A%84TSP%E7%AE%97%E6%B3%95/</id>
+        <title>基于混合粒子群算法的TSP算法</title>
+        <link rel="alternate" href="https://liujk6525.github.io/TSP%E9%97%AE%E9%A2%98/%E5%9F%BA%E4%BA%8E%E6%B7%B7%E5%90%88%E7%B2%92%E5%AD%90%E7%BE%A4%E7%AE%97%E6%B3%95%E7%9A%84TSP%E7%AE%97%E6%B3%95/"/>
+        <content type="html">&lt;h1 id=&#34;理论基础&#34;&gt;理论基础&lt;/h1&gt;
+&lt;h2 id=&#34;基本粒子群算法&#34;&gt;基本粒子群算法&lt;/h2&gt;
+&lt;p&gt;粒子群算法，也称粒子群优化算法或鸟群觅食算法（Particle Swarm Optimization，PSO），它通过追随当前搜索到的最优值来寻找全局最优。这种算法以其实现容易、精度高、收敛快等优点引起了学术界的重视，并且在解决实际问题中展示了其优越性。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h3 id=&#34;基本原理&#34;&gt;基本原理&lt;/h3&gt;
+&lt;p&gt;PSO中，每个优化问题的解都是搜索空间中的一只鸟。我们称之为“粒子”。所有的粒子都有一个由被优化的函数决定的适应值(fitness value)，每个粒子还有一个速度决定他们飞翔的方向和距离。然后粒子们就追随当前的最优粒子在解空间中搜索。&lt;/p&gt;
+&lt;p&gt;粒子位置的更新方式如下所示&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230511062229130.png&#34; alt=&#34;粒子位置额更新方式&#34; style=&#34;zoom: 67%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(PSO\)&lt;/span&gt;初始化为一群随机粒子(随机解)。然后通过迭代找到最优解。在每一次迭代中，粒子通过跟踪两个“极值”来更新自己。第一个就是粒子本身所找到的最优解，这个解叫做个体极值P&lt;sub&gt;best&lt;/sub&gt;。另一个极值是整个种群目前找到的最优解，这个极值是全局极值g&lt;sub&gt;best&lt;/sub&gt;。另外也可以不用整个种群而只是用其中一部分作为粒子的邻居，那么在所有邻居中的极值就是局部极值。&lt;/p&gt;
+&lt;p&gt;假设在一个D维的目标搜索空间中，有N个粒子组成一个种群，其中&lt;/p&gt;
+&lt;p&gt;第i个粒子为一个D维的向量 &lt;span class=&#34;math display&#34;&gt;\[
+X_i = (x_{i1},x_{i2},x_{i3},...x_{iD}),\quad i=1,2,3,...,N
+\]&lt;/span&gt; 第i个粒子的“飞行”速度也是一个D维的向量 &lt;span class=&#34;math display&#34;&gt;\[
+V_i = (v_{i1},v_{i2},v_{i3},...v_{iD}),\quad i=1,2,3,...,N
+\]&lt;/span&gt; 第i个粒子迄今为止搜索到的最优位置称为个体极值 &lt;span class=&#34;math display&#34;&gt;\[
+P_{best}=(p_{i1},p_{i2},p_{i3},...p_{iD}),\quad i=1,2,3,...,N
+\]&lt;/span&gt; 整个粒子群迄今为止搜索到的最优位置称为全局极值 &lt;span class=&#34;math display&#34;&gt;\[
+g_{best}=(p_{g1},p_{g2},p_{g3},...p_{gD})
+\]&lt;/span&gt; 在找到这两个最优值时，粒子根据如下公式更新自己的速度和位置 &lt;span class=&#34;math display&#34;&gt;\[
+v_{id}=w*v_{id}+c_1r_1(p_{id}-x_{id})+c_2r_2(p_{gd}-x_{id})\\
+x_{id}=x_{id}+v_{id}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;式中，w为惯性权重(inertia weight)，c&lt;sub&gt;1&lt;/sub&gt;,c&lt;sub&gt;2&lt;/sub&gt;为学习因子，也称为加速常量(acceleration constants)，r&lt;sub&gt;1&lt;/sub&gt;r&lt;sub&gt;2&lt;/sub&gt;为[0,1]范围内的均匀随机数&lt;/p&gt;
+&lt;p&gt;w*v&lt;sub&gt;id&lt;/sub&gt; 为“惯性”或者”动量“部分，反映了粒子的运动习惯，代表粒子有维持自己先前速度的趋势。&lt;/p&gt;
+&lt;p&gt;c&lt;sub&gt;1&lt;/sub&gt;r&lt;sub&gt;1&lt;/sub&gt;(p&lt;sub&gt;id&lt;/sub&gt;-x&lt;sub&gt;id&lt;/sub&gt;)为“认知”部分，反映了粒子对自身历史经验的记忆或回忆，代表了粒子有向自身历史最佳位置逼近的趋势。&lt;/p&gt;
+&lt;p&gt;c&lt;sub&gt;2&lt;/sub&gt;r&lt;sub&gt;2&lt;/sub&gt;(p&lt;sub&gt;gd&lt;/sub&gt;-x&lt;sub&gt;id&lt;/sub&gt;)为“社会”部分，反映了粒子间协同合作与知识共享的群体历史经验，代表了粒子有向群体或邻域历史最佳位置逼近的趋势。&lt;/p&gt;
+&lt;h3 id=&#34;pso算法的流程&#34;&gt;PSO算法的流程&lt;/h3&gt;
+&lt;ol type=&#34;1&#34;&gt;
+&lt;li&gt;初始化粒子群，包括群体规模N，每个粒子的位置x&lt;sub&gt;i&lt;/sub&gt;和速度v&lt;sub&gt;i&lt;/sub&gt;；&lt;/li&gt;
+&lt;li&gt;计算每个粒子的适应度Fitness(i)；&lt;/li&gt;
+&lt;li&gt;对每个粒子，将其适应值Fitness(i)与其经过的最优值P&lt;sub&gt;best&lt;/sub&gt;(i)作比较，如果较好，则将其替换掉原来的P&lt;sub&gt;best&lt;/sub&gt;(i)；&lt;/li&gt;
+&lt;li&gt;对每个粒子，将其适应值Fitness(i)与其经过的全局最优值g&lt;sub&gt;best&lt;/sub&gt;(i)作比较，如果较好，则将其替换掉原来的g&lt;sub&gt;best&lt;/sub&gt;(i)；&lt;/li&gt;
+&lt;li&gt;根据公式更新粒子的速度v&lt;sub&gt;i&lt;/sub&gt;和位置x&lt;sub&gt;i&lt;/sub&gt;；&lt;/li&gt;
+&lt;li&gt;如果满足结束条件退出，否则返回第2步。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230511055154081.png&#34; alt=&#34;PSO算法流程图&#34; style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;混合粒子群算法&#34;&gt;混合粒子群算法&lt;/h2&gt;
+&lt;p&gt;标准粒子群算法通过追随个体极值和群体极值完成极值寻优，虽然操作简单，且能够快速收敛，但是随着迭代次数的不断增加，在种群收敛集中的同时，各粒子也越来越相似，可能在局部最优解周边无法跳出。&lt;/p&gt;
+&lt;p&gt;混合粒子群算法摒弃了传统粒子群算法中的通过跟踪极值来更新粒子位置的方法，而是引入了&lt;code&gt;遗传算法&lt;/code&gt;中的交叉和变异操作，通过粒子同个体极值和群体极值的交叉以及粒子自身变异的方式来搜索最优解。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230511070402553.png&#34; alt=&#34;混合粒子群算法流程图&#34; style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;问题描述&#34;&gt;问题描述&lt;/h1&gt;
+&lt;p&gt;TSP问题，具体描述参考&lt;a href=&#34;https://liujk6525.github.io/posts/15650/&#34;&gt;&lt;code&gt;基于遗传算法的TSP算法&lt;/code&gt;&lt;/a&gt;，这边不在赘叙。&lt;/p&gt;
+&lt;h1 id=&#34;代码实现&#34;&gt;代码实现&lt;/h1&gt;
+&lt;h2 id=&#34;适应值变化&#34;&gt;适应值变化&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230511154328042.png&#34; alt=&#34;适应值变化图&#34; style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;苹果位置图&#34;&gt;苹果位置图&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230511160009530.png&#34; alt=&#34;苹果分布图&#34; style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;路径规划图&#34;&gt;路径规划图&lt;/h2&gt;
+&lt;p&gt;​ &lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230511154532035.png&#34; alt=&#34;路径规划图&#34; style=&#34;zoom: 80%;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;最优解&#34;&gt;最优解&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230511155618486.png&#34; alt=&#34;最优解&#34; style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+&lt;p&gt;[1]史峰. MATLAB智能算法30个案例分析[M]. 北京航空航天大学出版社, 2011.&lt;/p&gt;
+</content>
+        <category term="Matlab" />
+        <category term="路径规划" />
+        <updated>2023-05-10T13:10:59.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://liujk6525.github.io/TSP%E9%97%AE%E9%A2%98/%E5%9F%BA%E4%BA%8E%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E7%9A%84TSP%E7%AE%97%E6%B3%95/</id>
+        <title>基于遗传算法的TSP算法</title>
+        <link rel="alternate" href="https://liujk6525.github.io/TSP%E9%97%AE%E9%A2%98/%E5%9F%BA%E4%BA%8E%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E7%9A%84TSP%E7%AE%97%E6%B3%95/"/>
+        <content type="html">&lt;h2 id=&#34;理论基础&#34;&gt;理论基础&lt;/h2&gt;
+&lt;h3 id=&#34;遗传算法&#34;&gt;遗传算法&lt;/h3&gt;
+&lt;p&gt;遗传算法（Genetic Algorithm, GA）起源于对生物系统所进行的计算机模拟研究。它是模仿自然界生物进化机制发展起来的随机全局搜索和优化方法，借鉴了达尔文的进化论和孟德尔的遗传学说。其本质是一种高效、并行、全局搜索的方法。 &lt;span id=&#34;more&#34;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&#34;tsp问题&#34;&gt;TSP问题&lt;/h3&gt;
+&lt;p&gt;TSP (traveling salesman problem,旅行商问题) 是典型的NP完全问题，即其最坏情况下的时间复杂度随着问题规模的增大按指数方式增长，到目前为止还未找到一个多项式时间的有效算法。&lt;/p&gt;
+&lt;p&gt;​ TSP问题可描述为：已知n个城市相互之间的距离，某一旅行商从某个城市出发访问每个城市一次且仅一次，最后回到出发城市，如何安排才使其所走路线最短。简言之，就是寻找一条最短的遍历n个城市的路径，或者说搜索自然子集X={1,2,….n} ( X的元素表示对n个 城市的编号 ) 的一个排列π(X)={V&lt;sub&gt;1&lt;/sub&gt;,V&lt;sub&gt;2&lt;/sub&gt;,…,V&lt;sub&gt;n&lt;/sub&gt;},使 &lt;span class=&#34;math display&#34;&gt;\[
+T_d = \sum_{i=1}^{n-1}{d(V_i,V_(i+1))}+d(V_n,V_1)
+\]&lt;/span&gt; 取最小值，其中 &lt;span class=&#34;math display&#34;&gt;\[
+d(V_i,V_i+1)
+\]&lt;/span&gt; 表示城市V&lt;sub&gt;i&lt;/sub&gt;到城市V&lt;sub&gt;i+1&lt;/sub&gt;的距离。 ## 问题描述&lt;/p&gt;
+&lt;p&gt;通过搭建的双目视觉检测系统将苹果的三维坐标获取到后，需要对其进行路径规划，即寻找出一条最短的遍历所有目标苹果的路径&lt;/p&gt;
+&lt;p&gt;表1 14个苹果的位置坐标&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;目标苹果编号&lt;/th&gt;
+&lt;th&gt;X坐标&lt;/th&gt;
+&lt;th&gt;Y坐标&lt;/th&gt;
+&lt;th&gt;Z坐标&lt;/th&gt;
+&lt;th&gt;目标苹果编号&lt;/th&gt;
+&lt;th&gt;X坐标&lt;/th&gt;
+&lt;th&gt;Y坐标&lt;/th&gt;
+&lt;th&gt;Z坐标&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;16.47&lt;/td&gt;
+&lt;td&gt;96.10&lt;/td&gt;
+&lt;td&gt;45.25&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;17.20&lt;/td&gt;
+&lt;td&gt;96.29&lt;/td&gt;
+&lt;td&gt;48.62&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;16.47&lt;/td&gt;
+&lt;td&gt;94.44&lt;/td&gt;
+&lt;td&gt;44.25&lt;/td&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;16.30&lt;/td&gt;
+&lt;td&gt;97.38,&lt;/td&gt;
+&lt;td&gt;42.98&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;20.09&lt;/td&gt;
+&lt;td&gt;92.54&lt;/td&gt;
+&lt;td&gt;45.63&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;14.05&lt;/td&gt;
+&lt;td&gt;98.12,&lt;/td&gt;
+&lt;td&gt;41.86&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;22.39&lt;/td&gt;
+&lt;td&gt;93.37&lt;/td&gt;
+&lt;td&gt;47.21&lt;/td&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;16.53&lt;/td&gt;
+&lt;td&gt;97.38&lt;/td&gt;
+&lt;td&gt;,48.52&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;25.23&lt;/td&gt;
+&lt;td&gt;97.24&lt;/td&gt;
+&lt;td&gt;44.29&lt;/td&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;21.52&lt;/td&gt;
+&lt;td&gt;95.59&lt;/td&gt;
+&lt;td&gt;46.25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;22.00&lt;/td&gt;
+&lt;td&gt;96.05&lt;/td&gt;
+&lt;td&gt;48.45&lt;/td&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;19.41&lt;/td&gt;
+&lt;td&gt;97.13&lt;/td&gt;
+&lt;td&gt;45.71&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;20.47&lt;/td&gt;
+&lt;td&gt;97.02&lt;/td&gt;
+&lt;td&gt;47.56&lt;/td&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;20.09&lt;/td&gt;
+&lt;td&gt;92.55&lt;/td&gt;
+&lt;td&gt;44.44&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;解决思路及步骤&#34;&gt;解决思路及步骤&lt;/h2&gt;
+&lt;p&gt;遗传算法TSP问题的流程图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230510164303229.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;ol type=&#34;1&#34;&gt;
+&lt;li&gt;编码&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​ 对于n个苹果的TSP问题，染色体分为n段，例如检测到10个苹果{1,2,3,4,5,6,7,8,9,10}，则|1|0|2|4|5|6|8|7|9|3就是一个合法的染色体。&lt;/p&gt;
+&lt;ol start=&#34;2&#34; type=&#34;1&#34;&gt;
+&lt;li&gt;种群初始化&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​ 编码后，需要初始化一个种群作为起始解，初始化种群的数目一般根据经验得到，种群的数量按苹果的规模确定，参考的取值为50~200。&lt;/p&gt;
+&lt;ol start=&#34;3&#34; type=&#34;1&#34;&gt;
+&lt;li&gt;适应度函数&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​ 设k&lt;sub&gt;1&lt;/sub&gt;|k&lt;sub&gt;2&lt;/sub&gt;|k&lt;sub&gt;i&lt;/sub&gt;|…|k&lt;sub&gt;n&lt;/sub&gt;|为一个采用整数编码的染色体，d(k&lt;sub&gt;i&lt;/sub&gt;,k&lt;sub&gt;j&lt;/sub&gt;)为苹果k&lt;sub&gt;i&lt;/sub&gt;到苹果k&lt;sub&gt;j&lt;/sub&gt;的欧式距离，则该个体的适应度为 &lt;span class=&#34;math display&#34;&gt;\[
+fitness = \frac{1}{\sum_{i=1}^{n-1}{d(K_i,K_(i+1))}+d(K_n,K_1)}
+\]&lt;/span&gt; 即适应度函数恰好遍历了n个苹果，再回到第一个苹果的距离的倒数。优化的目标就是选择适应度函数值尽可能大的染色体。&lt;/p&gt;
+&lt;ol start=&#34;4&#34; type=&#34;1&#34;&gt;
+&lt;li&gt;选择操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​ 从旧群体中以一定概率选择个体到新群体中，个体被选中的概率跟适应度值有关，个体适应度值越大，被选中的概率越大。&lt;/p&gt;
+&lt;ol start=&#34;5&#34; type=&#34;1&#34;&gt;
+&lt;li&gt;交又操作 部分映射杂交，确定交叉操作的父代，将父代样本两两分组，每组重复以下过程。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​ 假定城市数为10)，产生两个[1,10]区间内的随机整数和r&lt;sub&gt;1&lt;/sub&gt;和r&lt;sub&gt;2&lt;/sub&gt;，确定两个位置，对两位置的中间数据进行交叉，如r&lt;sub&gt;1&lt;/sub&gt;=4,r&lt;sub&gt;2&lt;/sub&gt;=7 (其实就是把四和七中间的位置给互换，包括四七位置本身)&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;1&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;2&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;3&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;4&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;5&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;6&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;7&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;8&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;9&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;10&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;9&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;5&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;3&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;7&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;4&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;2&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;10&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;8&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;10&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;5&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;4&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;6&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;3&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;8&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;7&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;2&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;交叉后为&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;1&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;2&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;3&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;4&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;5&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;6&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;7&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;8&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;9&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;10&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;9&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;5&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;&lt;em&gt;1&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;&lt;em&gt;6&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;&lt;em&gt;3&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;&lt;em&gt;8&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;7&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;10&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;*&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;*&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;10&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;5&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;*&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;&lt;em&gt;3&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;&lt;em&gt;7&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;&lt;em&gt;4&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;&lt;em&gt;2&lt;/em&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;*&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;从表格中可以看到：同一个个体中有重复的编号，处理办法就是把不重复的数据保留，有重复的数据采用部分映射的方法消除冲突。就是利用四七段的映射关系来确定，比如第一个个体的九位置，它本来的数据是8的，现在这个数据8跑到六位置了，而原来的六位置的数据是4，所以现在的九位置变成4，最后在看这个个体缺少哪个数据，给补上就是了。&lt;/p&gt;
+&lt;ol start=&#34;6&#34; type=&#34;1&#34;&gt;
+&lt;li&gt;变异操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​ 随机选取两个点，将其对换位置。&lt;/p&gt;
+&lt;p&gt;​ 产生两个[1,10]范围内的随机整数r&lt;sub&gt;1&lt;/sub&gt;和r&lt;sub&gt;2&lt;/sub&gt;，确定两个位置，将其对换位置，如r&lt;sub&gt;1&lt;/sub&gt;=4,r&lt;sub&gt;2&lt;/sub&gt;=7&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;1&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;2&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;3&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;4&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;5&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;6&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;7&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;8&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;9&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;10&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;9&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;5&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;3&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;7&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;4&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;2&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;10&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;8&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;变异后为&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;th&gt;4&lt;/th&gt;
+&lt;th&gt;5&lt;/th&gt;
+&lt;th&gt;6&lt;/th&gt;
+&lt;th&gt;7&lt;/th&gt;
+&lt;th&gt;8&lt;/th&gt;
+&lt;th&gt;9&lt;/th&gt;
+&lt;th&gt;10&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;2&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;3&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ol start=&#34;7&#34; type=&#34;1&#34;&gt;
+&lt;li&gt;逆转操作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;​ 为改善遗传算法的局部搜索能力。这里的“进化”是指逆转算子的单方向性，即只有经逆转后，适应度值有提高的才接受下来，否则逆转无效。&lt;/p&gt;
+&lt;p&gt;​ 产生两个[1,10]区间内的随机整数片r&lt;sub&gt;1&lt;/sub&gt;和r&lt;sub&gt;2&lt;/sub&gt;，确定两个位置，将其对换位置，如r&lt;sub&gt;1&lt;/sub&gt;=4，r&lt;sub&gt;2&lt;/sub&gt;=7&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;1&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;2&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;3&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;4&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;5&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;6&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;7&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;8&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;9&lt;/th&gt;
+&lt;th style=&#34;text-align: center;&#34;&gt;10&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;9&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;5&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;3&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;7&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;4&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;2&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;10&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;8&lt;/td&gt;
+&lt;td style=&#34;text-align: center;&#34;&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;逆转后&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;th&gt;4&lt;/th&gt;
+&lt;th&gt;5&lt;/th&gt;
+&lt;th&gt;6&lt;/th&gt;
+&lt;th&gt;7&lt;/th&gt;
+&lt;th&gt;8&lt;/th&gt;
+&lt;th&gt;9&lt;/th&gt;
+&lt;th&gt;10&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;4&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;7&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;&lt;em&gt;3&lt;/em&gt;&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;​ 对每个个体进行交叉变异，然后代人适应度函数进行评估，选择出适应值大的个体进行下一代的交叉和变异以及逆转操作。&lt;/p&gt;
+&lt;p&gt;循环操作：判断是否满足设定的最大遗传代数,不满足则跳入适应度值的计算；否则，结束遗传操作。&lt;/p&gt;
+&lt;h2 id=&#34;代码实现&#34;&gt;代码实现&lt;/h2&gt;
+&lt;h3 id=&#34;适应值变化&#34;&gt;适应值变化&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230510183559745.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;苹果位置图&#34;&gt;苹果位置图&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230510185112226.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;路径规划图&#34;&gt;路径规划图&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230511155819983.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;最优解&#34;&gt;最优解&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230511155901209.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2 id=&#34;参考文献&#34;&gt;参考文献&lt;/h2&gt;
+&lt;p&gt;[1]史峰. MATLAB智能算法30个案例分析[M]. 北京航空航天大学出版社, 2011.&lt;/p&gt;
+</content>
+        <category term="Matlab" />
+        <category term="路径规划" />
+        <updated>2023-05-07T08:48:51.000Z</updated>
+    </entry>
+</feed>

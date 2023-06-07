@@ -1,0 +1,18 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "你不是单打独斗 • All posts by \"anaconda\" tag",
+    "description": "",
+    "home_page_url": "https://liujk6525.github.io",
+    "items": [
+        {
+            "id": "https://liujk6525.github.io/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/Anaconda-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9/",
+            "url": "https://liujk6525.github.io/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/Anaconda-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9/",
+            "title": "Anaconda--配置文件修改",
+            "date_published": "2023-05-26T05:44:08.000Z",
+            "content_html": "<p>将envs_dirs设置为自己anaconda安装的目录上（我的是在D:），不然他默认安装到.！！！</p>\r\n<p>因为我的anaconda安装在D盘，如果各位看官有充足的内存够安装在C盘，就当笑笑看啦~</p>\r\n<span id=\"more\"></span>\r\n<h1 id=\"首先第一步\">首先第一步！</h1>\r\n<p>修改 D：Anaconda3文件夹的权限，选中后右击选择属性，然后点击安全，选择<code>User</code>后点击编辑，将下面的权限全打勾，</p>\r\n<p>稍微等待一会时间。</p>\r\n<h1 id=\"二选一\">二选一</h1>\r\n<h2 id=\"修改.condarc推荐手残党\">修改./condarc（推荐，手残党）</h2>\r\n<ol type=\"1\">\r\n<li>直接将.，将下面的内容粘入，</li>\r\n</ol>\r\n<figure class=\"highlight txt\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br><span class=\"line\">3</span><br><span class=\"line\">4</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">envs_dirs:</span><br><span class=\"line\">  - D:\\Anaconda3\\envs</span><br><span class=\"line\">pkgs_dirs:</span><br><span class=\"line\">  - D:\\Anaconda3\\pkgs</span><br></pre></td></tr></table></figure>\r\n<ol start=\"2\" type=\"1\">\r\n<li><p>保存并关闭文件。</p></li>\r\n<li><p>打开一个终端，执行指令可查看conda配置信息。</p>\r\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">conda config --show</span><br></pre></td></tr></table></figure></li>\r\n</ol>\r\n<h2 id=\"修改指令\">修改指令</h2>\r\n<ol type=\"1\">\r\n<li><p>打开一个终端，执行添加指令，</p>\r\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">conda config --add envs_dirs D:\\Anaconda3\\envs</span><br><span class=\"line\">conda config --add pkgs_dir  D:\\Anaconda3\\pkgs</span><br></pre></td></tr></table></figure></li>\r\n<li><p>同样的，执行指令查看配置信息。</p>\r\n<figure class=\"highlight bash\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">conda config --show</span><br></pre></td></tr></table></figure></li>\r\n</ol>\r\n",
+            "tags": [
+                "Anaconda"
+            ]
+        }
+    ]
+}

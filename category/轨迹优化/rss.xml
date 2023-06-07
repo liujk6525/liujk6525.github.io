@@ -1,0 +1,349 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>你不是单打独斗 • Posts by &#34;轨迹优化&#34; category</title>
+        <link>https://liujk6525.github.io</link>
+        <description></description>
+        <language>zh-CN</language>
+        <pubDate>Tue, 16 May 2023 10:20:21 +0800</pubDate>
+        <lastBuildDate>Tue, 16 May 2023 10:20:21 +0800</lastBuildDate>
+        <category>Anaconda</category>
+        <category>Hexo</category>
+        <category>Jetson Nano</category>
+        <category>Yolo-v5</category>
+        <category>JupyterLab</category>
+        <category>Python</category>
+        <category>Jupyter Notebook</category>
+        <category>Git</category>
+        <category>Typora</category>
+        <category>Matlab</category>
+        <category>路径规划</category>
+        <category>python</category>
+        <category>ssd.pytorch</category>
+        <category>Yolov5</category>
+        <item>
+            <guid isPermalink="true">https://liujk6525.github.io/%E8%BD%A8%E8%BF%B9%E4%BC%98%E5%8C%96/%E8%BD%A8%E8%BF%B9%E4%BC%98%E5%8C%96-%E9%97%AD%E5%BC%8F%E6%B1%82%E8%A7%A3/</guid>
+            <title>轨迹优化-闭式求解</title>
+            <link>https://liujk6525.github.io/%E8%BD%A8%E8%BF%B9%E4%BC%98%E5%8C%96/%E8%BD%A8%E8%BF%B9%E4%BC%98%E5%8C%96-%E9%97%AD%E5%BC%8F%E6%B1%82%E8%A7%A3/</link>
+            <category>Matlab</category>
+            <pubDate>Tue, 16 May 2023 10:20:21 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;如果&lt;a href=&#34;https://baike.baidu.com/item/%E4%BA%8C%E6%AC%A1%E8%A7%84%E5%88%92/4269159&#34;&gt;&lt;code&gt;QP&lt;/code&gt;&lt;/a&gt;问题只有等式约束，没有不等式约束，可以采用&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E8%A7%A3%E6%9E%90%E8%A7%A3&#34;&gt;&lt;code&gt;闭式求解&lt;/code&gt;&lt;/a&gt;的方式。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h1 id=&#34;构建等式约束方程&#34;&gt;构建等式约束方程&lt;/h1&gt;
+&lt;p&gt;还是一段复杂的轨迹按照时间划分成&lt;span class=&#34;math inline&#34;&gt;\(m\)&lt;/span&gt;段，一共有&lt;span class=&#34;math inline&#34;&gt;\(m+1\)&lt;/span&gt;个点，其中&lt;span class=&#34;math inline&#34;&gt;\(0\)&lt;/span&gt;是起点，&lt;span class=&#34;math inline&#34;&gt;\(m\)&lt;/span&gt;是目标点，&lt;span class=&#34;math inline&#34;&gt;\(m-1\)&lt;/span&gt;个中间点。每段多项式轨迹都构成 &lt;span class=&#34;math display&#34;&gt;\[
+A_ip_i=d_i,\quad 
+A_i=\left[\begin{matrix}
+A_0\\A_T
+\end{matrix}\right]_i,\quad
+d_i=\left[\begin{matrix}
+d_0\\d_T
+\end{matrix}\right]_i
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中，&lt;span class=&#34;math inline&#34;&gt;\(d_o,d_T\)&lt;/span&gt;是第&lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;段多项式轨迹的起点和终点的各阶导数组成的向量。这里只考虑了位置速度和加速度。 &lt;span class=&#34;math display&#34;&gt;\[
+\underbrace{A_{total}}_{6m \times m(n+1)}
+\underbrace{
+\left[ \begin{matrix}
+p_1 \\
+\vdots \\
+p_m \\
+\end{matrix} \right]}_{m(n+1) \times 1} 
+= \left[ \begin{matrix}
+d_1 \\
+\vdots \\
+d_m \\
+\end{matrix} \right]
+=\underbrace{
+\left[ \begin{matrix}
+p_1(t_0)\\
+v_1(t_0)\\
+a_1(t_0)\\
+p_1(t_1)\\
+v_1(t_1)\\
+a_1(t_1)\\
+\vdots \\
+p_m(t_{m-1})\\
+v_m(t_{m-1})\\
+a_m(t_{m-1})\\
+p_m(t_m)\\
+v_m(t_m)\\
+a_m(t_m)\\
+\end{matrix} \right]}_{6m \times 1}
+\]&lt;/span&gt; 目标是要求解参数&lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; &lt;span class=&#34;math display&#34;&gt;\[
+p=A^{-1}d
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;消除重复变量&#34;&gt;消除重复变量&lt;/h2&gt;
+&lt;p&gt;考虑到连续性(这里假设P、V、A连续)，向量中很多变量重复了 &lt;span class=&#34;math display&#34;&gt;\[
+p_i(t_i)=p_{i+1}(t_i),~~v_i(t_i)=v_{i+1}(t_i),~~a_i(t_i)=a_{i+1}(t_i)
+\]&lt;/span&gt; 连续性约束不是直接加到等式约束方程中。而是通过一个映射矩阵&lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;将一个变量映射到两个重复的变量上。 &lt;span class=&#34;math display&#34;&gt;\[
+\underbrace{
+\left[ \begin{matrix}
+d_1 \\
+\vdots \\
+d_k \\
+\end{matrix} \right]}_{6m\times1}=
+\underbrace{
+\left[ \begin{matrix}
+1\\
+&amp;amp;1\\
+&amp;amp;&amp;amp;1\\
+&amp;amp;&amp;amp;&amp;amp;1\\
+&amp;amp;&amp;amp;&amp;amp;&amp;amp;1\\
+&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;1\\
+&amp;amp;&amp;amp;&amp;amp;1\\
+&amp;amp;&amp;amp;&amp;amp;&amp;amp;1\\
+&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;1\\
+&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;1\\
+&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;1\\
+&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;1\\
+&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;&amp;amp;\ddots
+\end{matrix} \right]}_{M}
+\underbrace{
+\left[\begin{matrix} 
+p(t_0)\\
+v(t_0)\\
+a(t_0)\\
+p(t_1)\\
+v(t_1)\\
+a(t_1)\\
+p(t_2)\\
+v(t_2)\\
+a(t_2)\\
+\vdots\\
+p(t_m)\\
+v(t_m)\\
+a(t_m)\\
+\end{matrix} \right]}_{3(m+1)\times 1}
+\]&lt;/span&gt; 即&lt;span class=&#34;math inline&#34;&gt;\(d=Md&amp;#39;\)&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;向量元素置换&#34;&gt;向量元素置换&lt;/h2&gt;
+&lt;p&gt;接着把已知参数 &lt;span class=&#34;math inline&#34;&gt;\(d_F\)&lt;/span&gt;和未知参数&lt;span class=&#34;math inline&#34;&gt;\(d_P\)&lt;/span&gt;重新排列，可以左乘一个置换矩阵&lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt;，使得&lt;span class=&#34;math inline&#34;&gt;\(d&amp;#39;=C\left[\begin{matrix}d_F\\d_P\end{matrix}\right]\)&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;转成无约束优化问题&#34;&gt;转成无约束优化问题&lt;/h2&gt;
+&lt;p&gt;所以 &lt;span class=&#34;math inline&#34;&gt;\(d=MC\left[\begin{matrix}d_F\\d_P\end{matrix}\right]\)&lt;/span&gt; &lt;span class=&#34;math display&#34;&gt;\[
+p=A^{-1}d=\underbrace{A^{-1}MC}_K\left[\begin{matrix}d_F\\d_P\end{matrix}\right] = K\left[\begin{matrix}d_F\\d_P\end{matrix}\right]
+\]&lt;/span&gt; 将&lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;代入优化函数 &lt;span class=&#34;math display&#34;&gt;\[
+\min p^TQp\\
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+=\left[\begin{matrix}d_F\\d_P\end{matrix}\right]^T\underbrace{K^TQK}_R\left[\begin{matrix}d_F\\d_P\end{matrix}\right]
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+=\left[\begin{matrix}d_F\\d_P\end{matrix}\right]^T
+\left[\begin{matrix}R_{FF} &amp;amp; R_{FP}\\R_{PF}&amp;amp;R_{PP}\end{matrix}\right]
+\left[\begin{matrix}d_F\\d_P\end{matrix}\right]
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+=d_F^TR_{FF}d_F+d_F^TR_{FP}d_P+d_P^TR_{PF}d_F+d_P^TR_{PP}d_P
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+=d_F^TR_{FF}d_F+2d_F^TR_{FP}d_P+d_P^TR_{PP}d_P
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;令优化函数&lt;span class=&#34;math inline&#34;&gt;\(mibn\)&lt;/span&gt;对&lt;span class=&#34;math inline&#34;&gt;\(d_P\)&lt;/span&gt;求导，并且令其导数等于0 &lt;span class=&#34;math display&#34;&gt;\[
+\rightarrow 2d_F^TR_{FP}+2R_{PP}d_P=0\quad(R_{PP}^T=R_{PP})\\
+\rightarrow d^*_p = -R_{PP}^{-1}R_{FP}^Td_F
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
+&lt;ol type=&#34;1&#34;&gt;
+&lt;li&gt;&lt;p&gt;先确定轨迹阶数(这里是用的5阶，因为A矩阵要为方形阵，所以&lt;span class=&#34;math inline&#34;&gt;\(6m=m(n+1)\rightarrow n=5\)&lt;/span&gt;)，再确定&lt;span class=&#34;math inline&#34;&gt;\(d\)&lt;/span&gt;中的约束量(p、v、a)，进而根据各段的时间分配求得&lt;span class=&#34;math inline&#34;&gt;\(A_{total}\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;根据连续性约束构造映射矩阵&lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;，并确定&lt;span class=&#34;math inline&#34;&gt;\(d\)&lt;/span&gt;中哪些量是已知的(fix/specified)，哪些量是未知的(free/unspecified)，进而构造置换矩阵&lt;span class=&#34;math inline&#34;&gt;\(C\)&lt;/span&gt;，并求得&lt;span class=&#34;math inline&#34;&gt;\(K=A^{-1}MC\)&lt;/span&gt;。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;计算目标函数中的Q矩阵，并计算&lt;span class=&#34;math inline&#34;&gt;\(R=K^TQK\)&lt;/span&gt;，根据已知参数(fix)的长度将&lt;span class=&#34;math inline&#34;&gt;\(R\)&lt;/span&gt;拆分成&lt;span class=&#34;math inline&#34;&gt;\(R_{FF},R_{FR},R_{FR},R_{PP}\)&lt;/span&gt;四小块。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;根据&lt;span class=&#34;math inline&#34;&gt;\(d^*_p = -R_{PP}^{-1}R_{FP}^Td_F\)&lt;/span&gt;计算&lt;span class=&#34;math inline&#34;&gt;\(d^*_p\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;根据&lt;span class=&#34;math inline&#34;&gt;\(p=K\left[\begin{matrix}d_F\\d_p\end{matrix}\right]\)&lt;/span&gt;计算得到轨迹参数&lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230516211818087.png&#34; style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230516211938320.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+&lt;p&gt;Richter C, Bry A, Roy N. Polynomial trajectory planning for aggressive quadrotor flight in dense indoor environments[C]//Robotics Research: The 16th International Symposium ISRR. Springer International Publishing, 2016: 649-666.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/q597967420/article/details/79031791?spm=1001.2014.3001.5502&#34;&gt;&lt;code&gt;Minimum Snap轨迹规划详解（3）闭式求解&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1yT4y1T7Eb?p=12&amp;amp;vd_source=fe8e916be2bd597efffd8dfd95249141&#34;&gt;&lt;code&gt;机器人路径规划、轨迹优化系列课程&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://liujk6525.github.io/%E8%BD%A8%E8%BF%B9%E4%BC%98%E5%8C%96/%E8%BD%A8%E8%BF%B9%E4%BC%98%E5%8C%96-MinimumSnap/</guid>
+            <title>轨迹优化-MinimumSnap</title>
+            <link>https://liujk6525.github.io/%E8%BD%A8%E8%BF%B9%E4%BC%98%E5%8C%96/%E8%BD%A8%E8%BF%B9%E4%BC%98%E5%8C%96-MinimumSnap/</link>
+            <category>Matlab</category>
+            <pubDate>Mon, 15 May 2023 14:16:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;基础知识&#34;&gt;基础知识&lt;/h1&gt;
+&lt;h2 id=&#34;二次型&#34;&gt;二次型&lt;/h2&gt;
+&lt;p&gt;含有n个变量&lt;span class=&#34;math inline&#34;&gt;\(x=x_1,x_2,\cdots,x_{n-1},x_{n}\)&lt;/span&gt;的二次齐次函数 &lt;span class=&#34;math display&#34;&gt;\[
+f(x_1,x_2,...,x_n)=a11x_1^2+a22x_2^2+\cdots+a_{nn}x_n^2
+\]&lt;/span&gt; 称为二次型。取&lt;span class=&#34;math inline&#34;&gt;\(a_{ij}=a_{ji}\)&lt;/span&gt;，则有&lt;span class=&#34;math inline&#34;&gt;\(2a_{ij}x_ix_j=a_{ij}x_ix_j+a_{ji}x_jx_i\)&lt;/span&gt;，上式可表示为&lt;span class=&#34;math inline&#34;&gt;\(f(x)=\sum_{i,j=1}^{n}a_{ij}x_ix_j\)&lt;/span&gt;。矩阵表示为&lt;span class=&#34;math inline&#34;&gt;\(f=x^TAx\)&lt;/span&gt;&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;二次规划quadratic-programming-qp&#34;&gt;二次规划(Quadratic Programming, &lt;a href=&#34;https://zh.wikipedia.org/wiki/%E4%BA%8C%E6%AC%A1%E8%A7%84%E5%88%92&#34;&gt;&lt;code&gt;QP&lt;/code&gt;&lt;/a&gt;)&lt;/h2&gt;
+&lt;p&gt;当目标函数&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;为二次型，且约束为线性约束时，该优化问题就是二次规划问题，一般形式表述如下： &lt;span class=&#34;math display&#34;&gt;\[
+\underset {x}{min}f(x)=\frac{x^TQx}{2}+q^Tx
+\]&lt;/span&gt; &lt;span class=&#34;math display&#34;&gt;\[
+s.t.Ax=b
+\]&lt;/span&gt; &lt;span class=&#34;math display&#34;&gt;\[
+Gx\leq h
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;二次规划是一类凸优化问题，目前有很多商业或者开源的求解器来求解这类问题。&lt;/p&gt;
+&lt;h1 id=&#34;多项式轨迹&#34;&gt;多项式轨迹&lt;/h1&gt;
+&lt;p&gt;使用路径规划可以得到一系列的路径点，但这些路径点是不带时间&lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;的，轨迹函数是以自变量为时间&lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;的函数，一般用&lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt;阶多项式表示 &lt;span class=&#34;math display&#34;&gt;\[
+p(t)=p_0t^0+p_1t^1+p_2t^2+\cdots+p_nt^n=\sum_{i=0}^{n}p_it^i
+\]&lt;/span&gt; 向量形式 &lt;span class=&#34;math display&#34;&gt;\[
+p(t)=\left[\begin{matrix}
+1&amp;amp;t&amp;amp;\cdots&amp;amp;t^n 
+\end{matrix}\right]
+\left[\begin{matrix}
+p_0\\p_1\\\vdots\\p_n 
+\end{matrix}\right]
+\]&lt;/span&gt; 其中&lt;span class=&#34;math inline&#34;&gt;\(p_0,p_1,\cdots,p_n\)&lt;/span&gt;是轨迹参数(n次多项式，有n+1个参数)，也是我们的优化参数。&lt;/p&gt;
+&lt;p&gt;对轨迹函数进行求导，可以写出它的速度&lt;span class=&#34;math inline&#34;&gt;\(v\)&lt;/span&gt;、加速度&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;、jerk、snap等参数随时间变化的函数 &lt;span class=&#34;math display&#34;&gt;\[
+v(t)=p^{1}(t)=\left[\begin{matrix}
+0&amp;amp;1&amp;amp;2t&amp;amp;3t^2&amp;amp;4t^3\cdots&amp;amp;\frac{n!}{(n-1)!}t^{n-1} 
+\end{matrix}\right]\cdot p
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+a(t)=p^{(2)}(t)=\left[\begin{matrix}
+0&amp;amp;0&amp;amp;2&amp;amp;6t&amp;amp;12t^2&amp;amp;\cdots&amp;amp;\frac{n!}{(n-2)!}t^{n-2} 
+\end{matrix}\right]\cdot p
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+jerk(t)=p^{(3)}(t)=\left[\begin{matrix}
+0&amp;amp;0&amp;amp;0&amp;amp;6&amp;amp;24t&amp;amp;\cdots&amp;amp;\frac{n!}{(n-3)!}t^{n-3} 
+\end{matrix}\right]\cdot p
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+snap(t)=p^{(4)}(t)=\left[\begin{matrix}
+0&amp;amp;0&amp;amp;0&amp;amp;0&amp;amp;24&amp;amp;\cdots&amp;amp;\frac{n!}{(n-4)!}t^{n-4} 
+\end{matrix}\right]\cdot p
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(p=\left[\begin{matrix} p_0&amp;amp;p_1&amp;amp;\cdots&amp;amp;p_n \end{matrix}\right]^T\)&lt;/span&gt;，轨迹函数&lt;span class=&#34;math inline&#34;&gt;\(p(t)\)&lt;/span&gt;的导数通式为 &lt;span class=&#34;math display&#34;&gt;\[
+p^{(k)}(t)=\left[\begin{matrix}
+\overset{k}{\overbrace{0\cdots0}}&amp;amp;\overset{n-k+1}{\overbrace{\frac{(k+0)!}{(0)!}t^{0}\quad
+\frac{(k+1)!}{(1)!}t^{1}\quad\cdots\quad
+\frac{n!}{(n-k)!}t^{n-k}
+}} 
+\end{matrix}\right]\cdot p
+\]&lt;/span&gt; 我们将一段复杂的轨迹按时间划分成&lt;span class=&#34;math inline&#34;&gt;\(m\)&lt;/span&gt;段，&lt;span class=&#34;math inline&#34;&gt;\(p_i=[p_{i_0},p_{i_1},\cdots,p_{i_n}]^T\)&lt;/span&gt;为第&lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;段轨迹的参数向量。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+p(t) = 
+\begin{cases}
+[1,t,t^2,...,t^n]\cdot p_1~~~t_0\leq t&amp;lt;t_1\\
+[1,t,t^2,...,t^n]\cdot p_2~~~t_1\leq t&amp;lt;t_2\\
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\vdots\\
+[1,t,t^2,...,t^n]\cdot p_m~~~t_{m-1}\leq t&amp;lt;t_m\\
+\end{cases}
+\end{equation}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;h1 id=&#34;minimum-snap轨迹规划&#34;&gt;Minimum Snap轨迹规划&lt;/h1&gt;
+&lt;p&gt;轨迹规划的目的：求轨迹的多项式参数&lt;span class=&#34;math inline&#34;&gt;\(p_1,\cdots,p_m\)&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;约束条件&#34;&gt;约束条件&lt;/h2&gt;
+&lt;p&gt;基本要求：&lt;/p&gt;
+&lt;ol type=&#34;1&#34;&gt;
+&lt;li&gt;两段轨迹之间连续&lt;/li&gt;
+&lt;li&gt;轨迹经过固定点&lt;/li&gt;
+&lt;li&gt;轨迹无碰撞&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;高级要求： 轨迹最顺滑、能量最优等&lt;/p&gt;
+&lt;h2 id=&#34;构建优化函数&#34;&gt;构建优化函数&lt;/h2&gt;
+&lt;p&gt;通常满足约束条件的轨迹有无数条，而实际问题中，往往只需要特定的一条轨迹，所以还需要构建一个最优函数，方便在可行的轨迹中找出最优的轨迹。&lt;/p&gt;
+&lt;p&gt;这是一个约束优化问题，形如： &lt;span class=&#34;math display&#34;&gt;\[
+\min f(p)
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+s.t.~~A_{eq}p = b_{eq},
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+A_{ieq}p \leq b_{ieq}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Minimum Snap&lt;/code&gt;顾名思义，最小化目标函数是&lt;span class=&#34;math inline&#34;&gt;\(Snap\)&lt;/span&gt;，当然也可以最小化Acceleration(加速度)或者Jerk，一般不会最小化速度。 &lt;span class=&#34;math display&#34;&gt;\[
+minimum~snap:~\min f(p)=\min (p^{(4)}(t))^2
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+minimum~jerk:~\min f(p)=\min (p^{(3)}(t))^2
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+minimum~a:~\min f(p)=\min (p^{(2)}(t))^2 \\
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Minimum Snap的优化函数为&lt;/strong&gt; &lt;span class=&#34;math display&#34;&gt;\[
+\min \int _0^T(p^{(4)}(t))^2 {\rm d}t
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+=\min \sum_{i=1}^m \int _{t_{i-1}}^{t_i}(p^{(4)}(t))^2 {\rm d}t
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+=\min \sum_{i=1}^m \int _{t_{i-1}}^{t_i}   ([0,0,0,0,24,\cdots,\frac{n!}{(n-4!)}t^{n-4}]\cdot p)^T[0,0,0,0,24,\cdots,\frac{n!}{(n-4!)}t^{n-4}]\cdot p~{\rm d}t
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+=\min \sum_{i=1}^m p^T\int _{t_{i-1}}^{t_i}[0,0,0,0,24,\cdots,\frac{n!}{(n-4!)}t^{n-4}]^T[0,0,0,0,24,\cdots,\frac{n!}{(n-4!)}t^{n-4}]~{\rm d}t~p
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+=\min \sum_{i=1}^m p^TQ_ip
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+=\min  p^TQp
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+Q_i = \int _{t_{i-1}}^{t_i}[0,0,0,0,24,\cdots,\frac{n!}{(n-4!)}t^{n-4}]^T[0,0,0,0,24,\cdots,\frac{n!}{(n-4!)}t^{n-4}]~{\rm d}t
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+=\left[\begin{matrix}
+0_{4\times 4} &amp;amp; 0_{4\times (n-3)}\\
+0_{(n-3) \times 4} &amp;amp; \frac{r!}{(r-4)!}\frac{c!}{(c-4)!}\frac{1}{(r-4)+(c-4)+1}(t_{i}^{(r+c-7)}-t_{i-1}^{(r+c-7)})
+\end{matrix}\right]
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：r,c为矩阵的行索引和列索引， 索引从0开始，即第一行r=0。这个Q&lt;sub&gt;i&lt;/sub&gt;矩阵计算可太厉害了&lt;/strong&gt; &lt;span class=&#34;math display&#34;&gt;\[
+Q = \left[\begin{matrix}
+        Q_1 &amp;amp;&amp;amp;&amp;amp;\\
+        &amp;amp;Q_2&amp;amp;&amp;amp;\\
+        &amp;amp;&amp;amp;\ddots &amp;amp;\\
+        &amp;amp;&amp;amp;&amp;amp;Q_m
+    \end{matrix}\right]
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;构建等式约束方程&#34;&gt;构建等式约束方程&lt;/h2&gt;
+&lt;p&gt;1、设定某一个点的位置、速度、加速度为一个特定的值,可以构成一个等式约束。&lt;/p&gt;
+&lt;p&gt;位置约束： &lt;span class=&#34;math inline&#34;&gt;\([1,t_0,t_0^2,\cdots,t_0^n,\underbrace{0\cdots0}_{(m-1)(n+1)}]\cdot p = p_0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;速度约束： &lt;span class=&#34;math inline&#34;&gt;\([0,1,2t_0,\cdots,nt_0^{n-1},\underbrace{0\cdots0}_{(m-1)(n+1)}]\cdot p = v_0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;加速度约束：&lt;span class=&#34;math inline&#34;&gt;\([0,0,2,\cdots,n(n-1)t_0^{n-2},\underbrace{0\cdots0}_{(m-1)(n+1)}]\cdot p = a_0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;2、相邻段之间的位置、速度、加速度连续可以构成一个等式约束。对于有m+1个路径点的轨迹，一共有m段多项式轨迹，&lt;/p&gt;
+&lt;p&gt;连续性约束：&lt;span class=&#34;math inline&#34;&gt;\([\underbrace{0\cdots0}_{(i-1)(n+1)},1,t_i,t_i^2,\cdots,t_i^n,-1,-t_i,-t_i^2,\cdots,-t_i^n,\underbrace{0\cdots0}_{(m-i-1)(n+1)}]\cdot p=0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;3、合并所有等式约束， &lt;span class=&#34;math display&#34;&gt;\[
+\begin{equation}
+\left[\begin{matrix}
+1,t_0,t_0^2,\cdots,t_0^n,\underbrace{0\cdots0}_{(m-1)(n+1)}\\
+0,1,2t_0,\cdots,nt_0^{n-1},\underbrace{0\cdots0}_{(m-1)(n+1)}\\
+0,0,2,\cdots,n(n-1)t_0^{n-2},\underbrace{0\cdots0}_{(m-1)(n+1)}\\
+\vdots\\
+\underbrace{0\cdots0}_{(i-1)(n+1)} ,1,t_i,t_i^2,\cdots,t_i^n,\underbrace{0\cdots0}_{(m-i)(n+1)}\\
+\vdots\\
+\underbrace{0\cdots0}_{(m-1)(n+1)},1,t_m,t_m^2,\cdots,t_m^n\\
+\underbrace{0\cdots0}_{(m-1)(n+1)},0,1,2t_m,\cdots,nt_m^{n-1}\\
+\underbrace{0\cdots0}_{(m-1)(n+1)},0,0,2,\cdots,n(n-1)t_m^{n-2}\\
+\underbrace{0\cdots0}_{(i-1)(n+1)} ,1,t_i,t_i^2,\cdots,t_i^n,-1,-t_i,-t_i^2,\cdots,-t_i^n,\underbrace{0\cdots0}_{(m-i-1)(n+1)}\\
+\underbrace{0\cdots0}_{(i-1)(n+1)} ,0,1,2t_i,\cdots,nt_i^{n-1},-0,-1,-2t_i,\cdots,-nt_i^{n-1},\underbrace{0\cdots0}_{(m-i-1)(n+1)}\\
+\underbrace{0\cdots0}_{(i-1)(n+1)} ,0,0,2,\cdots,\frac{n!}{(n-2)!}t_i^{n-2},-0,-0,-2,\cdots,-\frac{n!}{(n-2)!}t_i^{n-2},\underbrace{0\cdots0}_{(m-i-1)(n+1)}\\
+\end{matrix}\right]_{(4m+2)\times (n+1)m}
+\end{equation}p
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+=
+\left[\begin{matrix}
+p_0\\
+v_0\\
+a_0\\
+\vdots\\
+p_i\\
+\vdots\\
+p_m\\
+v_m\\
+a_m\\
+0\\
+\vdots\\
+0
+\end{matrix}\right]
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;等式约束个数=3{起点p&lt;sub&gt;0&lt;/sub&gt;、v&lt;sub&gt;0&lt;/sub&gt;、a&lt;sub&gt;0&lt;/sub&gt;}+m-1{中间点的p&lt;sub&gt;i&lt;/sub&gt;}+3{目标点p&lt;sub&gt;m&lt;/sub&gt;、v&lt;sub&gt;m&lt;/sub&gt;、a&lt;sub&gt;m&lt;/sub&gt;}+3(m-1){中间点p&lt;sub&gt;i&lt;/sub&gt;、v&lt;sub&gt;i&lt;/sub&gt;、a&lt;sub&gt;i&lt;/sub&gt;连续=0}=4m+2&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;代码实现&#34;&gt;代码实现&lt;/h1&gt;
+&lt;p&gt;生成x、y两个维度的轨迹，合并后如下图所示。包含起始终止共7个点，用6段多项式轨迹来描述，中间点也就是多项式轨迹之间的交界点。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230515212657627.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230515212839998.png&#34;  style=&#34;zoom:80%;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+&lt;p&gt;Mellinger D, Kumar V. Minimum snap trajectory generation and control for quadrotors[C]//2011 IEEE international conference on robotics and automation. IEEE, 2011: 2520-2525.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1yT4y1T7Eb?p=10&amp;amp;vd_source=fe8e916be2bd597efffd8dfd95249141&#34;&gt;&lt;code&gt;机器人路径规划、轨迹优化系列课程&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/q597967420/article/details/76099491&#34;&gt;&lt;code&gt;Minimum Snap轨迹规划详解（1）轨迹规划入门&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
