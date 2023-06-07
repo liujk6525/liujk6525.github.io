@@ -3,21 +3,64 @@
     <id>https://liujk6525.github.io</id>
     <title>你不是单打独斗 • Posts by &#34;jupyter notebook&#34; tag</title>
     <link href="https://liujk6525.github.io" />
-    <updated>2023-06-07T01:32:09.000Z</updated>
+    <updated>2023-06-07T07:56:38.000Z</updated>
+    <category term="Anaconda" />
+    <category term="Hexo" />
     <category term="Jetson Nano" />
     <category term="Yolo-v5" />
-    <category term="Hexo" />
-    <category term="Anaconda" />
+    <category term="JupyterLab" />
     <category term="Python" />
     <category term="Jupyter Notebook" />
-    <category term="JupyterLab" />
-    <category term="Git" />
     <category term="Typora" />
+    <category term="Git" />
     <category term="Matlab" />
     <category term="路径规划" />
     <category term="python" />
-    <category term="Yolov5" />
     <category term="ssd.pytorch" />
+    <category term="Yolov5" />
+    <entry>
+        <id>https://liujk6525.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/</id>
+        <title>贝叶斯算法</title>
+        <link rel="alternate" href="https://liujk6525.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/"/>
+        <content type="html">&lt;h1 id=&#34;贝叶斯算法&#34;&gt;贝叶斯算法&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;总体信息：当前总体样本符合某种分布。比如抛硬币符合二项 分布；学生的某一科的成绩符合正态分布。&lt;/li&gt;
+&lt;li&gt;样本信息：通过抽样得到的部分样本的某种分布。&lt;/li&gt;
+&lt;li&gt;抽样信息=总体信息+样本信息&lt;/li&gt;
+&lt;li&gt;先验信息：抽样之前，有关推断问题中未知参数的一些信息， 通常来自于经验或历史资料。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;基于抽样信息进行统计推断的理论和方法称为经典统计学。&lt;/p&gt;
+&lt;p&gt;基于抽样信息+先验信息进行统计推断的方法和理 论，称为贝叶斯统计学。&lt;/p&gt;
+&lt;h2 id=&#34;贝叶斯定理&#34;&gt;&lt;a href=&#34;https://baike.baidu.com/item/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%85%AC%E5%BC%8F/9683982?fr=aladdin&#34;&gt;贝叶斯定理&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;已知&lt;span class=&#34;math inline&#34;&gt;\(P(X|H)\)&lt;/span&gt;，要求解&lt;span class=&#34;math inline&#34;&gt;\(P(H|X)\)&lt;/span&gt; &lt;span class=&#34;math display&#34;&gt;\[
+P(H|X)=\frac{P(X|H)P(H)}{P(X)}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;示例代码&#34;&gt;示例代码&lt;/h2&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 导入算法包以及数据集&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; numpy &lt;span class=&#34;keyword&#34;&gt;as&lt;/span&gt; np&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; sklearn &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; datasets&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; sklearn.model_selection &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; train_test_split&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; sklearn.metrics &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; classification_report,confusion_matrix&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;from&lt;/span&gt; sklearn.naive_bayes &lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; MultinomialNB,BernoulliNB,GaussianNB&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 载入数据&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;iris = datasets.load_iris()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;x_train,x_test,y_train,y_test = train_test_split(iris.data, iris.target) &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 创建并拟合模型&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mul_nb = GaussianNB()&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;mul_nb.fit(x_train,y_train)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;# 评估&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;built_in&#34;&gt;print&lt;/span&gt;(classification_report(mul_nb.predict(x_test),y_test))&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230607165131324.png&#34;  style=&#34;zoom: 67%;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;词袋模型bag-of-words&#34;&gt;词袋模型(Bag of Words)&lt;/h2&gt;
+&lt;p&gt;Bag of words model（BoW）最早出现在自然语言处理（Natural Language Processing）和信息检索 （Information Retrieval）领域。&lt;/p&gt;
+&lt;p&gt;该模型忽略掉文本的语法和语序等要素，将其仅仅看作是若干个词汇的集合，文档中每个单词的出现都是独立的。BoW使用一组无序的单词(words)来表达一段文字或一个文档。&lt;/p&gt;
+&lt;p&gt;简单例子&lt;/p&gt;
+&lt;p&gt;首先给出两个简单的文本文档如下：&lt;/p&gt;
+&lt;p&gt;John likes to watch movies. Mary likes too.&lt;/p&gt;
+&lt;p&gt;John also likes to watch football games.&lt;/p&gt;
+&lt;p&gt;对于上述两个文档中出现的单词，构建如下一个词典 (dictionary)：&lt;/p&gt;
+&lt;p&gt;{“John”: 1, “likes”: 2,“to”: 3, “watch”: 4, “movies”: 5,“also”: 6, “football”: 7, “games”: 8,“Mary”: 9, “too”: 10}&lt;/p&gt;
+&lt;p&gt;上面的词典中包含10个单词, 每个单词有唯一的索引, 那么每个文本可以使用一个10维的向量来表示。&lt;/p&gt;
+&lt;p&gt;[1, 2, 1, 1, 1, 0, 0, 0, 1, 1]&lt;/p&gt;
+&lt;p&gt;[1, 1,1, 1, 0, 1, 1, 1, 0, 0]&lt;/p&gt;
+&lt;p&gt;该向量与原来文本中单词出现的顺序没有关系，而是词典中每个单词在文本中出现的频率。&lt;/p&gt;
+&lt;h2 id=&#34;tf-idf&#34;&gt;TF-IDF&lt;/h2&gt;
+&lt;p&gt;TF（Term Frequency） 词频&lt;/p&gt;
+&lt;p&gt;IDF （Inverse Document Frequency）逆文档频率&lt;/p&gt;
+&lt;h1 id=&#34;参考&#34;&gt;参考&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1Rt411q7WJ?p=60&#34;&gt;贝叶斯算法&lt;/a&gt;&lt;/p&gt;
+</content>
+        <category term="Python" />
+        <category term="Jupyter Notebook" />
+        <updated>2023-06-07T07:56:38.000Z</updated>
+    </entry>
     <entry>
         <id>https://liujk6525.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/</id>
         <title>集成学习</title>
