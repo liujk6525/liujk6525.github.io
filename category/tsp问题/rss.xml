@@ -7,20 +7,20 @@
         <language>zh-CN</language>
         <pubDate>Wed, 10 May 2023 21:10:59 +0800</pubDate>
         <lastBuildDate>Wed, 10 May 2023 21:10:59 +0800</lastBuildDate>
-        <category>Anaconda</category>
         <category>Hexo</category>
+        <category>Anaconda</category>
         <category>Jetson Nano</category>
         <category>Yolo-v5</category>
         <category>JupyterLab</category>
         <category>Python</category>
         <category>Jupyter Notebook</category>
-        <category>Git</category>
         <category>Typora</category>
+        <category>Git</category>
         <category>Matlab</category>
         <category>路径规划</category>
         <category>python</category>
-        <category>Yolov5</category>
         <category>ssd.pytorch</category>
+        <category>Yolov5</category>
         <item>
             <guid isPermalink="true">https://liujk6525.github.io/TSP%E9%97%AE%E9%A2%98/%E5%9F%BA%E4%BA%8E%E6%B7%B7%E5%90%88%E7%B2%92%E5%AD%90%E7%BE%A4%E7%AE%97%E6%B3%95%E7%9A%84TSP%E7%AE%97%E6%B3%95/</guid>
             <title>基于混合粒子群算法的TSP算法</title>
