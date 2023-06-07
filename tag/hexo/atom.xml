@@ -11,13 +11,13 @@
     <category term="JupyterLab" />
     <category term="Python" />
     <category term="Jupyter Notebook" />
-    <category term="Typora" />
     <category term="Git" />
+    <category term="Typora" />
     <category term="Matlab" />
     <category term="路径规划" />
     <category term="python" />
-    <category term="ssd.pytorch" />
     <category term="Yolov5" />
+    <category term="ssd.pytorch" />
     <entry>
         <id>https://liujk6525.github.io/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/NexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E9%BC%A0%E6%A0%87%E7%89%B9%E6%95%88/</id>
         <title>NexT主题添加鼠标特效</title>
