@@ -14,13 +14,13 @@
         <category>JupyterLab</category>
         <category>Python</category>
         <category>Jupyter Notebook</category>
-        <category>Git</category>
         <category>Typora</category>
+        <category>Git</category>
         <category>Matlab</category>
         <category>路径规划</category>
         <category>python</category>
-        <category>ssd.pytorch</category>
         <category>Yolov5</category>
+        <category>ssd.pytorch</category>
         <item>
             <guid isPermalink="true">https://liujk6525.github.io/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/JupyterLab%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</guid>
             <title>JupyterLab安装与配置</title>

@@ -14,13 +14,13 @@
         <category>JupyterLab</category>
         <category>Python</category>
         <category>Jupyter Notebook</category>
-        <category>Git</category>
         <category>Typora</category>
+        <category>Git</category>
         <category>Matlab</category>
         <category>路径规划</category>
         <category>python</category>
-        <category>ssd.pytorch</category>
         <category>Yolov5</category>
+        <category>ssd.pytorch</category>
         <item>
             <guid isPermalink="true">https://liujk6525.github.io/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/%E8%B7%91%E9%80%9AYolo-v5/</guid>
             <title>wii11系统跑通Yolo-v5</title>
