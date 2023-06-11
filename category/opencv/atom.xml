@@ -5,19 +5,19 @@
     <link href="https://liujk6525.github.io" />
     <updated>2023-05-20T06:16:48.000Z</updated>
     <category term="Anaconda" />
-    <category term="Jetson Nano" />
-    <category term="Yolo-v5" />
     <category term="Hexo" />
-    <category term="JupyterLab" />
     <category term="Python" />
     <category term="Jupyter Notebook" />
+    <category term="Jetson Nano" />
+    <category term="Yolo-v5" />
+    <category term="JupyterLab" />
     <category term="Typora" />
     <category term="Git" />
     <category term="Matlab" />
     <category term="路径规划" />
     <category term="python" />
-    <category term="ssd.pytorch" />
     <category term="Yolov5" />
+    <category term="ssd.pytorch" />
     <entry>
         <id>https://liujk6525.github.io/OpenCV/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E6%A1%88%E4%BE%8B/</id>
         <title>人脸识别案例</title>

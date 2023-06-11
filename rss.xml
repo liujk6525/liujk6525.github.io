@@ -8,19 +8,19 @@
         <pubDate>Wed, 07 Jun 2023 21:39:07 +0800</pubDate>
         <lastBuildDate>Wed, 07 Jun 2023 21:39:07 +0800</lastBuildDate>
         <category>Anaconda</category>
-        <category>Jetson Nano</category>
-        <category>Yolo-v5</category>
         <category>Hexo</category>
-        <category>JupyterLab</category>
         <category>Python</category>
         <category>Jupyter Notebook</category>
+        <category>Jetson Nano</category>
+        <category>Yolo-v5</category>
+        <category>JupyterLab</category>
         <category>Typora</category>
         <category>Git</category>
         <category>Matlab</category>
         <category>路径规划</category>
         <category>python</category>
-        <category>ssd.pytorch</category>
         <category>Yolov5</category>
+        <category>ssd.pytorch</category>
         <item>
             <guid isPermalink="true">https://liujk6525.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</guid>
             <title>支持向量机</title>
@@ -688,7 +688,11 @@ F_1=\frac{2\times Precision\times Recall}{Precision+Recall}
             <description><![CDATA[ &lt;h1 id=&#34;基本概念&#34;&gt;基本概念：&lt;/h1&gt;
 &lt;p&gt;将数据划分为三部分：&lt;span class=&#34;math inline&#34;&gt;\(\begin{cases} 训练集(Train):用来训练，构建模型\\ 验证集(Validate):在模型训练阶段，测试模型的好坏\\ 测试集(Test):等模型训练好后，评估模型的好坏 \end{cases}\)&lt;/span&gt;&lt;/p&gt;
 &lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
-&lt;p&gt;学习方式：&lt;span class=&#34;math inline&#34;&gt;\(\begin{cases} 监督学习\\ 无监督学习\\ 半监督学习 \end{cases}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;学习方式：&lt;span class=&#34;math inline&#34;&gt;\(\begin{cases} 监督学习\\ 无监督学习\\ 半监督学习\\ 强化学习\end{cases}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;监督学习&lt;/strong&gt;是利用一组&lt;strong&gt;带标签的数据&lt;/strong&gt;，学习从输入到输出的映射关系&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;，然后将学习到的映射关系&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;应用到未知的数据上，用于预测未知数据的类别或数值。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;半监督学习&lt;/strong&gt;属于监督学习的延伸，它的输入数据小部分有标签的，而&lt;strong&gt;大部分是没有标签的&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;无监督学习&lt;/strong&gt;是为了标识出数据内在的结构和规律，输入数据是没有任何标签的。常见的有关联规则分析、数据降维、聚类算法、词嵌入等。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;强化学习&lt;/strong&gt;通过&lt;strong&gt;试错&lt;/strong&gt;（Trail and Error）学会在给定的情境下选择最恰当的行为。&lt;/p&gt;
 &lt;p&gt;常见应用：&lt;span class=&#34;math inline&#34;&gt;\(\begin{cases} 回归：预测数据为连续型数值。\\ 分类：预测数据为类别型数据，并且类别已知。\\ 聚类：预测数据为类别型数据，但是类别未知。 \end{cases}\)&lt;/span&gt;&lt;/p&gt;
 &lt;h1 id=&#34;回归分析regression&#34;&gt;&lt;a href=&#34;https://baike.baidu.com/item/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/2625498?fr=aladdin&#34;&gt;回归分析（Regression）&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;回归分析用来建立方程，模拟两个或者多个变量之间如何关联，&lt;/p&gt;

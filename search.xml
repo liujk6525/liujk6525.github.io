@@ -1119,7 +1119,11 @@ F_1=\frac{2\times Precision\times Recall}{Precision+Recall}
     <content><![CDATA[<h1 id="基本概念">基本概念：</h1>
 <p>将数据划分为三部分：<span class="math inline">\(\begin{cases} 训练集(Train):用来训练，构建模型\\ 验证集(Validate):在模型训练阶段，测试模型的好坏\\ 测试集(Test):等模型训练好后，评估模型的好坏 \end{cases}\)</span></p>
 <span id="more"></span>
-<p>学习方式：<span class="math inline">\(\begin{cases} 监督学习\\ 无监督学习\\ 半监督学习 \end{cases}\)</span></p>
+<p>学习方式：<span class="math inline">\(\begin{cases} 监督学习\\ 无监督学习\\ 半监督学习\\ 强化学习\end{cases}\)</span></p>
+<p><strong>监督学习</strong>是利用一组<strong>带标签的数据</strong>，学习从输入到输出的映射关系<span class="math inline">\(f\)</span>，然后将学习到的映射关系<span class="math inline">\(f\)</span>应用到未知的数据上，用于预测未知数据的类别或数值。</p>
+<p><strong>半监督学习</strong>属于监督学习的延伸，它的输入数据小部分有标签的，而<strong>大部分是没有标签的</strong>。</p>
+<p><strong>无监督学习</strong>是为了标识出数据内在的结构和规律，输入数据是没有任何标签的。常见的有关联规则分析、数据降维、聚类算法、词嵌入等。</p>
+<p><strong>强化学习</strong>通过<strong>试错</strong>（Trail and Error）学会在给定的情境下选择最恰当的行为。</p>
 <p>常见应用：<span class="math inline">\(\begin{cases} 回归：预测数据为连续型数值。\\ 分类：预测数据为类别型数据，并且类别已知。\\ 聚类：预测数据为类别型数据，但是类别未知。 \end{cases}\)</span></p>
 <h1 id="回归分析regression"><a href="https://baike.baidu.com/item/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/2625498?fr=aladdin">回归分析（Regression）</a></h1>
 <p>回归分析用来建立方程，模拟两个或者多个变量之间如何关联，</p>
