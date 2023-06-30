@@ -3,14 +3,15 @@
     <id>https://liujk6525.github.io</id>
     <title>你不是单打独斗</title>
     <link href="https://liujk6525.github.io" />
-    <updated>2023-06-07T13:39:07.000Z</updated>
-    <category term="Anaconda" />
+    <updated>2023-06-12T02:51:01.000Z</updated>
     <category term="Hexo" />
-    <category term="Python" />
-    <category term="Jupyter Notebook" />
+    <category term="Anaconda" />
     <category term="Jetson Nano" />
     <category term="Yolo-v5" />
     <category term="JupyterLab" />
+    <category term="Python" />
+    <category term="Jupyter Notebook" />
+    <category term="PyTorch" />
     <category term="Typora" />
     <category term="Git" />
     <category term="Matlab" />
@@ -18,6 +19,36 @@
     <category term="python" />
     <category term="Yolov5" />
     <category term="ssd.pytorch" />
+    <entry>
+        <id>https://liujk6525.github.io/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PyTorch%E4%BB%8B%E7%BB%8D/</id>
+        <title>PyTorch介绍</title>
+        <link rel="alternate" href="https://liujk6525.github.io/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PyTorch%E4%BB%8B%E7%BB%8D/"/>
+        <content type="html">&lt;h1 id=&#34;pytorch-安装&#34;&gt;PyTorch 安装&lt;/h1&gt;
+&lt;p&gt;通过借助Anaconda安装PyTorch，Anaconda集成了大批科学计算的第三方库，如Conda，Python和150多个科学包和依赖项。&lt;/p&gt;
+&lt;h2 id=&#34;创建和删除环境&#34;&gt;创建和删除环境&lt;/h2&gt;
+&lt;p&gt;创建环境，env_name是要创建的环境名称；list_of_pakages是在新环境中需要安装的工具包。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda create -n env_name list_of_packages&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;删除环境&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda &lt;span class=&#34;built_in&#34;&gt;env&lt;/span&gt; remove -n env_name&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;查看和切换环境&#34;&gt;查看和切换环境&lt;/h2&gt;
+&lt;p&gt;显示当前环境列表&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda &lt;span class=&#34;built_in&#34;&gt;env&lt;/span&gt; list&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;切换环境或者叫激活环境&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda activate env_name&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;复制环境&#34;&gt;复制环境&lt;/h2&gt;
+&lt;p&gt;生成存储当前环境下包信息的yaml文件&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda &lt;span class=&#34;built_in&#34;&gt;env&lt;/span&gt; &lt;span class=&#34;built_in&#34;&gt;export&lt;/span&gt; &amp;gt; enviroment.yaml&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;用该文件创建环境，里面的prefix和name根据自己的需求做相应的修改。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda &lt;span class=&#34;built_in&#34;&gt;env&lt;/span&gt; -f enviroment.yaml&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230612111120504.png&#34;  style=&#34;zoom: 80%;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230612110954261.png&#34;  style=&#34;zoom: 67%;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;查看当前环境下已安装的包&#34;&gt;查看当前环境下已安装的包&lt;/h2&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda list&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+        <category term="Python" />
+        <category term="PyTorch" />
+        <updated>2023-06-12T02:51:01.000Z</updated>
+    </entry>
     <entry>
         <id>https://liujk6525.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</id>
         <title>支持向量机</title>
@@ -39,6 +70,7 @@ x\cdot y=x_1y_1+x_2y_2+\cdots+x_ny_n=||x||\cdot||y||\cos(\theta)
 &lt;p&gt;当&lt;span class=&#34;math inline&#34;&gt;\(||x||\neq0,||y||\neq0\)&lt;/span&gt;时，求解余弦相似度 &lt;span class=&#34;math display&#34;&gt;\[
 \cos(\theta)=\frac{x\cdot y}{||x||\cdot||y||}
 \]&lt;/span&gt;&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
 &lt;h2 id=&#34;推导&#34;&gt;推导&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230608085359722.png&#34;  style=&#34;zoom: 67%;&#34; /&gt; &lt;span class=&#34;math display&#34;&gt;\[
 w\cdot x_1+b=1
@@ -183,6 +215,7 @@ cov(z,x)&amp;amp;cov(z,y)&amp;amp;cov(z,z)
 &lt;h2 id=&#34;k-means&#34;&gt;&lt;a href=&#34;https://baike.baidu.com/item/K%E5%9D%87%E5%80%BC%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/15779627?fromtitle=K-MEANS%E7%AE%97%E6%B3%95&amp;amp;fromid=594631&amp;amp;fr=aladdin&#34;&gt;K-Means&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;以空间中k个点为中心进行聚类，对最靠近他们的对象归类。通过迭代的方法，逐次更新各聚类中心的值，直至得到最好的聚类结果。&lt;/p&gt;
 &lt;p&gt;同一聚类中的对象相似度较高；而不同聚类中的对象相似度较小。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
 &lt;p&gt;算法流程：&lt;/p&gt;
 &lt;ol type=&#34;1&#34;&gt;
 &lt;li&gt;&lt;p&gt;先从没有标签的元素集合A中随机取k个元素，作为 k个子集各自的重心。&lt;/p&gt;&lt;/li&gt;

@@ -433,6 +433,39 @@ fitness = \frac{1}{\sum_{i=1}^{n-1}{d(K_i,K_(i+1))}+d(K_n,K_1)}
       </tags>
   </entry>
   <entry>
+    <title>PyTorch介绍</title>
+    <url>/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PyTorch%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h1 id="pytorch-安装">PyTorch 安装</h1>
+<p>通过借助Anaconda安装PyTorch，Anaconda集成了大批科学计算的第三方库，如Conda，Python和150多个科学包和依赖项。</p>
+<h2 id="创建和删除环境">创建和删除环境</h2>
+<p>创建环境，env_name是要创建的环境名称；list_of_pakages是在新环境中需要安装的工具包。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda create -n env_name list_of_packages</span><br></pre></td></tr></table></figure>
+<p>删除环境</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda <span class="built_in">env</span> remove -n env_name</span><br></pre></td></tr></table></figure>
+<h2 id="查看和切换环境">查看和切换环境</h2>
+<p>显示当前环境列表</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda <span class="built_in">env</span> list</span><br></pre></td></tr></table></figure>
+<p>切换环境或者叫激活环境</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda activate env_name</span><br></pre></td></tr></table></figure>
+<h2 id="复制环境">复制环境</h2>
+<p>生成存储当前环境下包信息的yaml文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda <span class="built_in">env</span> <span class="built_in">export</span> &gt; enviroment.yaml</span><br></pre></td></tr></table></figure>
+<p>用该文件创建环境，里面的prefix和name根据自己的需求做相应的修改。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda <span class="built_in">env</span> -f enviroment.yaml</span><br></pre></td></tr></table></figure>
+<p><img src="/imgs/$%7Bfiilename%7D/image-20230612111120504.png"  style="zoom: 80%;" /></p>
+<p><img src="/imgs/$%7Bfiilename%7D/image-20230612110954261.png"  style="zoom: 67%;" /></p>
+<h2 id="查看当前环境下已安装的包">查看当前环境下已安装的包</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda list</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>PyTorch学习笔记</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>PyTorch</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>支持向量机</title>
     <url>/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</url>
     <content><![CDATA[<h1 id="支持向量机support-vector-machinessvm"><a href="https://baike.baidu.com/link?url=4o8vmNTvVy9pd-Dpxirhv80tv92zBfxvv6uPHb4Wm3yyPV94e21R3itRTww9yHzkoXyesQZ8fAlpV-DZ579U5p1DUeS6T2O_hv_5Iwz7LHbAGg2cNexGPAxywQhxIzyKReLlwFlWv2iCdo1HE-_tKK">支持向量机（Support Vector Machines，SVM）</a></h1>
@@ -452,6 +485,7 @@ x\cdot y=x_1y_1+x_2y_2+\cdots+x_ny_n=||x||\cdot||y||\cos(\theta)
 <p>当<span class="math inline">\(||x||\neq0,||y||\neq0\)</span>时，求解余弦相似度 <span class="math display">\[
 \cos(\theta)=\frac{x\cdot y}{||x||\cdot||y||}
 \]</span></p>
+<span id="more"></span>
 <h2 id="推导">推导</h2>
 <p><img src="/imgs/$%7Bfiilename%7D/image-20230608085359722.png"  style="zoom: 67%;" /> <span class="math display">\[
 w\cdot x_1+b=1
@@ -602,6 +636,7 @@ cov(z,x)&amp;cov(z,y)&amp;cov(z,z)
 <h2 id="k-means"><a href="https://baike.baidu.com/item/K%E5%9D%87%E5%80%BC%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/15779627?fromtitle=K-MEANS%E7%AE%97%E6%B3%95&amp;fromid=594631&amp;fr=aladdin">K-Means</a></h2>
 <p>以空间中k个点为中心进行聚类，对最靠近他们的对象归类。通过迭代的方法，逐次更新各聚类中心的值，直至得到最好的聚类结果。</p>
 <p>同一聚类中的对象相似度较高；而不同聚类中的对象相似度较小。</p>
+<span id="more"></span>
 <p>算法流程：</p>
 <ol type="1">
 <li><p>先从没有标签的元素集合A中随机取k个元素，作为 k个子集各自的重心。</p></li>

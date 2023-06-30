@@ -4,13 +4,14 @@
     <title>你不是单打独斗 • Posts by &#34;jupyter notebook&#34; tag</title>
     <link href="https://liujk6525.github.io" />
     <updated>2023-06-07T13:39:07.000Z</updated>
-    <category term="Anaconda" />
     <category term="Hexo" />
-    <category term="Python" />
-    <category term="Jupyter Notebook" />
+    <category term="Anaconda" />
     <category term="Jetson Nano" />
     <category term="Yolo-v5" />
     <category term="JupyterLab" />
+    <category term="Python" />
+    <category term="Jupyter Notebook" />
+    <category term="PyTorch" />
     <category term="Typora" />
     <category term="Git" />
     <category term="Matlab" />
@@ -39,6 +40,7 @@ x\cdot y=x_1y_1+x_2y_2+\cdots+x_ny_n=||x||\cdot||y||\cos(\theta)
 &lt;p&gt;当&lt;span class=&#34;math inline&#34;&gt;\(||x||\neq0,||y||\neq0\)&lt;/span&gt;时，求解余弦相似度 &lt;span class=&#34;math display&#34;&gt;\[
 \cos(\theta)=\frac{x\cdot y}{||x||\cdot||y||}
 \]&lt;/span&gt;&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
 &lt;h2 id=&#34;推导&#34;&gt;推导&lt;/h2&gt;
 &lt;p&gt;&lt;img src=&#34;/imgs/$%7Bfiilename%7D/image-20230608085359722.png&#34;  style=&#34;zoom: 67%;&#34; /&gt; &lt;span class=&#34;math display&#34;&gt;\[
 w\cdot x_1+b=1
@@ -183,6 +185,7 @@ cov(z,x)&amp;amp;cov(z,y)&amp;amp;cov(z,z)
 &lt;h2 id=&#34;k-means&#34;&gt;&lt;a href=&#34;https://baike.baidu.com/item/K%E5%9D%87%E5%80%BC%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/15779627?fromtitle=K-MEANS%E7%AE%97%E6%B3%95&amp;amp;fromid=594631&amp;amp;fr=aladdin&#34;&gt;K-Means&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;以空间中k个点为中心进行聚类，对最靠近他们的对象归类。通过迭代的方法，逐次更新各聚类中心的值，直至得到最好的聚类结果。&lt;/p&gt;
 &lt;p&gt;同一聚类中的对象相似度较高；而不同聚类中的对象相似度较小。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
 &lt;p&gt;算法流程：&lt;/p&gt;
 &lt;ol type=&#34;1&#34;&gt;
 &lt;li&gt;&lt;p&gt;先从没有标签的元素集合A中随机取k个元素，作为 k个子集各自的重心。&lt;/p&gt;&lt;/li&gt;

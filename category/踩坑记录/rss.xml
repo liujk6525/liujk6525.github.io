@@ -7,13 +7,14 @@
         <language>zh-CN</language>
         <pubDate>Mon, 29 May 2023 14:08:59 +0800</pubDate>
         <lastBuildDate>Mon, 29 May 2023 14:08:59 +0800</lastBuildDate>
-        <category>Anaconda</category>
         <category>Hexo</category>
-        <category>Python</category>
-        <category>Jupyter Notebook</category>
+        <category>Anaconda</category>
         <category>Jetson Nano</category>
         <category>Yolo-v5</category>
         <category>JupyterLab</category>
+        <category>Python</category>
+        <category>Jupyter Notebook</category>
+        <category>PyTorch</category>
         <category>Typora</category>
         <category>Git</category>
         <category>Matlab</category>
