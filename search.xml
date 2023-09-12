@@ -433,6 +433,20 @@ fitness = \frac{1}{\sum_{i=1}^{n-1}{d(K_i,K_(i+1))}+d(K_n,K_1)}
       </tags>
   </entry>
   <entry>
+    <title>数据结构与算法</title>
+    <url>/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="判断水仙花数">判断水仙花数</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">IsFollower</span>(<span class="params">n</span>):</span><br><span class="line">    total = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> m <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">11</span>):</span><br><span class="line">        <span class="keyword">if</span> (n/<span class="number">10</span>**m&lt;<span class="number">1</span>) <span class="keyword">and</span> (n/<span class="number">10</span>**(m-<span class="number">1</span>)&gt;<span class="number">1</span>): <span class="comment">## 判断数字的位数</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">                b = ((n//<span class="number">10</span>**(m-i-<span class="number">1</span>))%<span class="number">10</span>)**m</span><br><span class="line">                total += b</span><br><span class="line">    <span class="keyword">if</span> total==n:</span><br><span class="line">        <span class="built_in">print</span>(n,<span class="string">&quot;是水仙数&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>,<span class="number">10</span>**<span class="number">10</span>):</span><br><span class="line">    IsFollower(n)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Jupyter Notebook</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PyTorch介绍</title>
     <url>/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PyTorch%E4%BB%8B%E7%BB%8D/</url>
     <content><![CDATA[<h1 id="pytorch-安装">PyTorch 安装</h1>
@@ -716,7 +730,7 @@ P(H|X)=\frac{P(X|H)P(H)}{P(X)}
 <p>John also likes to watch football games.</p>
 <p>对于上述两个文档中出现的单词，构建如下一个词典 (dictionary)：</p>
 <p>{“John”: 1, “likes”: 2,“to”: 3, “watch”: 4, “movies”: 5,“also”: 6, “football”: 7, “games”: 8,“Mary”: 9, “too”: 10}</p>
-<p>上面的词典中包含10个单词, 每个单词有唯一的索引, 那么每个文本可以使用一个10维的向量来表示。</p>
+<p>xxxxxxxxxx conda config –showbash</p>
 <p>[1, 2, 1, 1, 1, 0, 0, 0, 1, 1]</p>
 <p>[1, 1,1, 1, 0, 1, 1, 1, 0, 0]</p>
 <p>该向量与原来文本中单词出现的顺序没有关系，而是词典中每个单词在文本中出现的频率。</p>

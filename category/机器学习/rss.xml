@@ -268,7 +268,7 @@ P(H|X)=\frac{P(X|H)P(H)}{P(X)}
 &lt;p&gt;John also likes to watch football games.&lt;/p&gt;
 &lt;p&gt;对于上述两个文档中出现的单词，构建如下一个词典 (dictionary)：&lt;/p&gt;
 &lt;p&gt;{“John”: 1, “likes”: 2,“to”: 3, “watch”: 4, “movies”: 5,“also”: 6, “football”: 7, “games”: 8,“Mary”: 9, “too”: 10}&lt;/p&gt;
-&lt;p&gt;上面的词典中包含10个单词, 每个单词有唯一的索引, 那么每个文本可以使用一个10维的向量来表示。&lt;/p&gt;
+&lt;p&gt;xxxxxxxxxx conda config –showbash&lt;/p&gt;
 &lt;p&gt;[1, 2, 1, 1, 1, 0, 0, 0, 1, 1]&lt;/p&gt;
 &lt;p&gt;[1, 1,1, 1, 0, 1, 1, 1, 0, 0]&lt;/p&gt;
 &lt;p&gt;该向量与原来文本中单词出现的顺序没有关系，而是词典中每个单词在文本中出现的频率。&lt;/p&gt;
