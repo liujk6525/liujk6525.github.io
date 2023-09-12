@@ -453,6 +453,7 @@ fitness = \frac{1}{\sum_{i=1}^{n-1}{d(K_i,K_(i+1))}+d(K_n,K_1)}
     <url>/PyTorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PyTorch%E4%BB%8B%E7%BB%8D/</url>
     <content><![CDATA[<h1 id="pytorch-安装">PyTorch 安装</h1>
 <p>通过借助Anaconda安装PyTorch，Anaconda集成了大批科学计算的第三方库，如Conda，Python和150多个科学包和依赖项。</p>
+<span id="more"></span>
 <h2 id="创建和删除环境">创建和删除环境</h2>
 <p>创建环境，env_name是要创建的环境名称；list_of_pakages是在新环境中需要安装的工具包。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda create -n env_name list_of_packages</span><br></pre></td></tr></table></figure>

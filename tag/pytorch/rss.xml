@@ -31,6 +31,7 @@
             <pubDate>Mon, 12 Jun 2023 10:51:01 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;pytorch-安装&#34;&gt;PyTorch 安装&lt;/h1&gt;
 &lt;p&gt;通过借助Anaconda安装PyTorch，Anaconda集成了大批科学计算的第三方库，如Conda，Python和150多个科学包和依赖项。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
 &lt;h2 id=&#34;创建和删除环境&#34;&gt;创建和删除环境&lt;/h2&gt;
 &lt;p&gt;创建环境，env_name是要创建的环境名称；list_of_pakages是在新环境中需要安装的工具包。&lt;/p&gt;
 &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;conda create -n env_name list_of_packages&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
