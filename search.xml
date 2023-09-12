@@ -604,7 +604,7 @@ b^{*}=y_i-(w^{*})^Tx_i
 <li>将原始数据投影到选取的特征向量上。</li>
 <li>输出投影后的数据集。</li>
 </ol>
-<!--- more -->
+<span id="more"></span>
 <h2 id="协方差">协方差</h2>
 <p>方差就是描述<strong>一个数据</strong>的离散程度： <span class="math display">\[
 var(X)=\frac{\sum_{i=1}^{n}{(X_i-\overline X)(X_i-\overline X)}}{n-1}
